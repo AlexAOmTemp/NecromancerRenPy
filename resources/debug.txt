@@ -1,0 +1,114 @@
+event1_sv [u'castle']
+event3_sv [u'castle', u'forest']
+event4_sv [u'field', u'forest']
+map_A1 castle [event1_sv ] [u'event2_rp'] 
+
+map_B1 field [event4_sv ] [] 
+
+map_C1 village [] [] 
+
+map_D1 hill [] [] 
+
+map_E1 hill [] [] 
+
+map_F1 mountain [] [] 
+
+map_J1 road [] [] 
+
+map_H1 field [event4_sv ] [] 
+
+map_I1 castle [event1_sv event1_sv event3_sv ] [u'event2_rp'] 
+
+map_A2 village [] [] 
+
+map_B2 field [event4_sv ] [] 
+
+map_C2 town [] [] 
+
+map_D2 hill [] [] 
+
+map_E2 hill [] [] 
+
+map_F2 mountain [] [] 
+
+map_J2 road [] [] 
+
+map_H2 town [] [] 
+
+map_I2 village [] [] 
+
+map_A3 forest [event4_sv ] [] 
+
+map_B3 forest [event4_sv ] [] 
+
+map_C3 road [] [] 
+
+map_D3 tract [] [] 
+
+map_E3 hill [] [] 
+
+map_F3 tract [] [] 
+
+map_J3 tract [] [] 
+
+map_H3 mountain [] [] 
+
+map_I3 mountain [] [] 
+
+map_A4 forest [event4_sv ] [] 
+
+map_B4 forest [event4_sv ] [] 
+
+map_C4 abyss [] [] 
+
+map_D4 tract [] [] 
+
+map_E4 crossroads [] [] 
+
+map_F4 river [] [] 
+
+map_J4 river [] [] 
+
+map_H4 river [] [] 
+
+map_I4 lake [] [] 
+
+map_A5 swamp [] [] 
+
+map_B5 swamp [] [] 
+
+map_C5 abyss [] [] 
+
+map_D5 forest [event3_sv event4_sv ] [] 
+
+map_E5 lake [] [] 
+
+map_F5 brige [] [] 
+
+map_J5 lake [] [] 
+
+map_H5 village [] [] 
+
+map_I5 field [event4_sv ] [] 
+
+map_A6 swamp [] [] 
+
+map_B6 swamp [] [] 
+
+map_C6 abyss [] [] 
+
+map_D6 tower [] [] 
+
+map_E6 forest [event3_sv event4_sv ] [] 
+
+map_F6 lake [] [] 
+
+map_J6 town [] [] 
+
+map_H6 road [] [] 
+
+map_I6 castle [event1_sv event1_sv ] [u'event2_rp'] 
+
+[{u'max_times_happens': 5, u'name': u'event1_sv', u'level': u'normal', u'jump_to_label': u'event_one', u'saveble': True, u'needs_events': [], u'blocks_events': [], u'reward': {u'items': [u'poor_sword', u'\u0440\u0436\u0430\u0432\u044b\u0439 \u043c\u0435\u0447'], u'rare': 3, u'gold': [100, 300]}}, {u'max_times_happens': 0, u'name': u'event2_rp', u'level': u'poor', u'jump_to_label': u'event_two', u'saveble': False, u'needs_events': [], u'blocks_events': [], u'reward': {u'poor': 1}}, {u'max_times_happens': 3, u'name': u'event3_sv', u'level': u'magic', u'jump_to_label': u'event_three', u'saveble': True, u'needs_events': [], u'blocks_events': [], u'reward': {u'magic': 1}}, {u'max_times_happens': 10, u'name': u'event4_sv', u'level': u'rare', u'jump_to_label': u'event_four', u'saveble': True, u'needs_events': [], u'blocks_events': [], u'reward': {u'rare': 1}}] /n
+[{u'name': u'castle', u'events': [u'event1_sv', u'event3_sv', u'event2_rp']}, {u'name': u'field', u'events': [u'event4_sv']}, {u'name': u'forest', u'events': [u'event4_sv', u'event3_sv']}] /n
+[[u'castle', u'field', u'village', u'hill', u'hill', u'mountain', u'road', u'field', u'castle'], [u'village', u'field', u'town', u'hill', u'hill', u'mountain', u'road', u'town', u'village'], [u'forest', u'forest', u'road', u'tract', u'hill', u'tract', u'tract', u'mountain', u'mountain'], [u'forest', u'forest', u'abyss', u'tract', u'crossroads', u'river', u'river', u'river', u'lake'], [u'swamp', u'swamp', u'abyss', u'forest', u'lake', u'brige', u'lake', u'village', u'field'], [u'swamp', u'swamp', u'abyss', u'tower', u'forest', u'lake', u'town', u'road', u'castle']] /n

@@ -1,0 +1,23 @@
+[
+    {
+        "name": "castle",
+        "events": [
+            "event1_sv",
+            "event3_sv",
+            "event2_rp"
+        ]
+    },
+    {
+        "name": "field",
+        "events": [
+            "event4_sv"
+        ]
+    },
+    {
+        "name": "forest",
+        "events": [
+            "event4_sv",
+            "event3_sv"
+        ]
+    }
+]

@@ -1,0 +1,52 @@
+[
+    {
+        "name": "event1_sv",
+        "max_times_happens": 5,
+        "blocks_events": [],
+        "needs_events": [],
+        "jump_to_label": "event_one",
+        "saveble": true,
+	"level": "normal",
+	"reward":{
+    		"rare":3,
+    		"items":["poor_sword","ржавый меч"],
+    		"gold": [100, 300]
+    	}
+    },
+    {
+        "name": "event2_rp",
+        "max_times_happens": 0,
+        "blocks_events": [],
+        "needs_events": [],
+        "jump_to_label": "event_two",
+        "saveble": false,
+	"level": "poor",
+	"reward":{
+    		"poor":1
+    	}
+    },
+    {
+        "name": "event3_sv",
+        "max_times_happens": 3,
+        "blocks_events": [],
+        "needs_events": [],
+        "jump_to_label": "event_three",
+        "saveble": true,
+	"level": "magic",
+	"reward":{
+    		"magic":1
+    	}
+    },
+    {
+        "name": "event4_sv",
+        "max_times_happens": 10,
+        "blocks_events": [],
+        "needs_events": [],
+        "jump_to_label": "event_four",
+        "saveble": true,
+	"level": "rare",
+	"reward":{
+    		"rare":1
+    	}
+    }
+]

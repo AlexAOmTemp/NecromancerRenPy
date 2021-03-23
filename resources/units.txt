@@ -1,0 +1,61 @@
+[{
+"type": "hero",
+"name": "Necromancer",
+"health": 100,
+"armor": 0.2,
+"block": 0.2,
+"dmg_melee": 20,
+"dmg_range": 15,
+"line": "back",
+"skills": ["range attack", "melee attack"]
+}, {
+"type": "human",
+"name": "Evil Peasant",
+"health": 80,
+"armor": 0.0,
+"block": 0.0,
+"dmg_melee": 18,
+"dmg_range": 0,
+"line": "front",
+"skills": ["melee attack"]
+}, {
+"type": "human",
+"name": "Peasant's son",
+"health": 50,
+"armor": 0.0,
+"block": 0.0,
+"dmg_melee": 10,
+"dmg_range": 7,
+"line": "back",
+"skills": ["range attack","melee attack"]
+},{
+"type": "undead",
+"name": "Sceleton",
+"health": 60,
+"armor": 0.0,
+"block": 0.0,
+"dmg_melee": 10,
+"dmg_range": 0,
+"line": "front",
+"skills": ["melee attack"]
+},{
+"type": "human",
+"name": "test_human1",
+"health": 60,
+"armor": 0.0,
+"block": 0.0,
+"dmg_melee": 10,
+"dmg_range": 0,
+"line": "front",
+"skills": ["melee attack"]
+},{
+"type": "gung", 
+"name": "test_unit2",
+"health": 60,
+"armor": 0.0,
+"block": 0.0,
+"dmg_melee": 10,
+"dmg_range": 0,
+"line": "front",
+"skills": ["melee attack"]
+}]

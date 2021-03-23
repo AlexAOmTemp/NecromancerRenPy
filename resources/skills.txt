@@ -1,0 +1,22 @@
+[{
+"name": "range attack", 
+"target": "enemy", 
+"targets quant": 1, 
+"min range": 1, 
+"max range": 3, 
+"value": 0, 
+"depends self": {"dmg_range": 1.0}, 
+"depends enemy": "", 
+"effect": "decrease health"
+}, 
+{
+"name": "melee attack", 
+"target": "enemy", 
+"targets quant": 1, 
+"min range": 0, 
+"max range": 0, 
+"value": 0, 
+"depends self": {"dmg_melee": 1.0}, 
+"depends enemy": "", 
+"effect": "decrease health"
+}]

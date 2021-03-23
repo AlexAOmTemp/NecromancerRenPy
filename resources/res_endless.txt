@@ -1,0 +1,12 @@
+[
+    {
+        "image": "res_Icon.png", 
+        "enable": false, 
+        "name": "wood"
+    }, 
+    {
+        "image": "res_Icon.png", 
+        "enable": false, 
+        "name": "stone"
+    }
+]

@@ -1,0 +1,9 @@
+[{
+"name": "decrease health", 
+"affect": "health", 
+"effect": "-"
+}, {
+"name": "increase health", 
+"affect": "health", 
+"effect": "+"
+}]

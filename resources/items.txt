@@ -1,0 +1,32 @@
+[
+    {
+        "slot": "weapon", 
+        "name": "обычный меч", 
+        "level": "normal"
+    }, 
+    {
+        "slot": "weapon", 
+        "name": "ржавый меч", 
+        "level": "poor"
+    }, 
+    {
+        "slot": "weapon", 
+        "name": "магический меч", 
+        "level": "magic"
+    }, 
+    {
+        "slot": "weapon", 
+        "name": "редкий меч", 
+        "level": "rare"
+    }, 
+    {
+        "slot": "weapon", 
+        "name": "легендарный меч", 
+        "level": "legendary"
+    }, 
+    {
+        "slot": "armor", 
+        "name": "редкий доспех", 
+        "level": "rare"
+    }
+]
