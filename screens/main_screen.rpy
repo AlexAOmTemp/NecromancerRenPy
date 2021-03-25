@@ -13,6 +13,7 @@ image board bottom  = im.FactorScale("board top.png", scaling)
     # (60, 848, 320, 60)
 
 screen general():
+    tag main
     default tt = Tooltip(" ")
 
     imagemap:

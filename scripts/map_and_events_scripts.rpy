@@ -13,11 +13,12 @@ init python:
             self.saveble = params["saveble"]
             self.level = params["level"]
             self.reward = params["reward"]
+            self.army = params["army"]
 
         def happens (self):
             global event_ended
             event_ended = False
-            e ("Начато событие %s. Перехожу на метку %s"%(self.name, self.jump_to_label))
+            e ("Начало события \"%s\"."%(self.name))
             renpy.call ( self.jump_to_label)
 
         def is_valid (self):
@@ -47,10 +48,10 @@ init python:
                 choose=random.randint(0,100)
                 if choose<100 and self.saveble_events!=[]:
                     posibble_events = self.saveble_events
-                    e ("сохраняемое событие")
+                    #e ("сохраняемое событие")
                 else:
                     posibble_events=self.repetable_events_names
-                    e ("Регулярное событие")
+                    #e ("Регулярное событие")
                 print (posibble_events)
                 if posibble_events==[]:
                     e ("Нет событий")
@@ -82,8 +83,8 @@ init python:
                 st=[]
                 for i in range(len(self.unfinished_events)):
                     st+=self.unfinished_events[i].name
-                logging("start_unfinished\nunfinished=%s"%(self.unfinished_events))
-                logging("position=%d\nunfinished_events=%s\ncurrent_event=%s\n\n" % (position,st,self.current_event) )
+                #logging("start_unfinished\nunfinished=%s"%(self.unfinished_events))
+                #logging("position=%d\nunfinished_events=%s\ncurrent_event=%s\n\n" % (position,st,self.current_event) )
                 self.current_event.happens()
 
             def finish_unfinished (self):
@@ -102,6 +103,7 @@ init python:
                 #logging("finish_unfinished\n"+repr(self)+"\n\n")
 
             def getRewardforCurrentEvent(self):
+                nvl_clear()
                 e ("событие пройдено")
                 it, gld = reward_generator.getReward(self.current_event.reward)
                 currency.items += it
@@ -146,7 +148,7 @@ init python:
                     i=0
                     j=0
                     random.shuffle(cells)
-                    print (ev["name"], types,file = debug)
+                    logging ( "%s %s" % (ev["name"],types) )
                     while (i<ev["max_times_happens"]):
                         cells[j].saveble_events.append(event(ev))
                         i+=1
@@ -210,18 +212,4 @@ init python:
                 else:
                     print ("Неверный ввод")
 
-
-    debug=codecs.open( renpy.loader.transfn("resources/debug.txt"),'w', encoding='utf-8')
     logging ("map and events")
-    map_cells_ls = cells_list ()
-    events_to_cells()
-    for c in map_cells_ls:
-        st= "["
-        for ev in c.saveble_events:
-            st+=(ev.name+' ')
-        st+= "]"
-        print (c.name, c.type, st,c.repetable_events_names,"\n",file = debug)
-    print(events_list,"/n", file =debug)
-    print(cell_types_list,"/n", file =debug)
-    print(map_by_types,"/n", file =debug)
-    debug.close()

@@ -1,4 +1,5 @@
 log
+battle
 currency
 items
 0 ржавый меч
@@ -12,407 +13,69 @@ map and events
 rewards
 units
 globals 2
+Осада замка [u'castle']
 start
-round 1
+poor: quant = 1, amount = 1, persent = 0.000000, mult = 2 
 умерло юнитов: 0 
 умерло юнитов: 0 
-our army frontline 1, our army backline 1
-enemy army frontline 3, enemy army backline 1
-our army 2 units
-enemy army 4 units
-current range 3
-our unit attacks:
-our unit attacks:
-
-
-enemy unit attacks:
-enemy unit attacks:
-enemy unit attacks:
-enemy unit attacks:
-round 2
 умерло юнитов: 0 
 умерло юнитов: 0 
-our army frontline 1, our army backline 1
-enemy army frontline 3, enemy army backline 1
-our army 2 units
-enemy army 4 units
-current range 2
-our unit attacks:
-Necromancer is using a skill range attack on: Sceleton with power 15
-Sceleton get 15 damage. Its current health 45
-our unit attacks:
-
-
-enemy unit attacks:
-enemy unit attacks:
-Peasant's son is using a skill range attack on: Sceleton with power 7
-Sceleton get 7 damage. Its current health 53
-enemy unit attacks:
-enemy unit attacks:
-round 3
 умерло юнитов: 0 
 умерло юнитов: 0 
-our army frontline 1, our army backline 1
-enemy army frontline 3, enemy army backline 1
-our army 2 units
-enemy army 4 units
-current range 1
-our unit attacks:
-Necromancer is using a skill range attack on: Evil Peasant with power 15
-Evil Peasant get 15 damage. Its current health 65
-our unit attacks:
-
-
-enemy unit attacks:
-enemy unit attacks:
-Peasant's son is using a skill range attack on: Sceleton with power 7
-Sceleton get 7 damage. Its current health 46
-enemy unit attacks:
-enemy unit attacks:
-round 4
 умерло юнитов: 0 
 умерло юнитов: 0 
-our army frontline 1, our army backline 1
-enemy army frontline 3, enemy army backline 1
-our army 2 units
-enemy army 4 units
-current range 0
-our unit attacks:
-Necromancer is using a skill range attack on: Evil Peasant with power 15
-Evil Peasant get 15 damage. Its current health 50
-our unit attacks:
-Sceleton is using a skill melee attack on: Sceleton with power 10
-Sceleton get 10 damage. Its current health 35
-
-
-enemy unit attacks:
-Evil Peasant is using a skill melee attack on: Sceleton with power 18
-Sceleton get 18 damage. Its current health 28
-enemy unit attacks:
-Peasant's son is using a skill range attack on: Sceleton with power 7
-Sceleton get 7 damage. Its current health 21
-enemy unit attacks:
-Sceleton is using a skill melee attack on: Sceleton with power 10
-Sceleton get 10 damage. Its current health 11
-enemy unit attacks:
-test_unit2 is using a skill melee attack on: Sceleton with power 10
-Sceleton get 10 damage. Its current health 1
-round 5
 умерло юнитов: 0 
 умерло юнитов: 0 
-our army frontline 1, our army backline 1
-enemy army frontline 3, enemy army backline 1
-our army 2 units
-enemy army 4 units
-current range 0
-our unit attacks:
-Necromancer is using a skill range attack on: Sceleton with power 15
-Sceleton get 15 damage. Its current health 20
-our unit attacks:
-Sceleton is using a skill melee attack on: Sceleton with power 10
-Sceleton get 10 damage. Its current health 10
-
-
-enemy unit attacks:
-Evil Peasant is using a skill melee attack on: Sceleton with power 18
-Sceleton get 18 damage. He is dead. Its current health -17
-enemy unit attacks:
-Peasant's son is using a skill range attack on: Sceleton with power 7
-Sceleton get 7 damage. He is dead. Its current health -24
-enemy unit attacks:
-Sceleton is using a skill melee attack on: Sceleton with power 10
-Sceleton get 10 damage. He is dead. Its current health -34
-enemy unit attacks:
-test_unit2 is using a skill melee attack on: Sceleton with power 10
-Sceleton get 10 damage. He is dead. Its current health -44
-round 6
-умерло юнитов: 1 Sceleton 
 умерло юнитов: 0 
-our army frontline 1, our army backline 0
-enemy army frontline 3, enemy army backline 1
-our army 1 units
-enemy army 4 units
-current range 0
-our unit attacks:
-Necromancer is using a skill melee attack on: Sceleton with power 20
-Sceleton get 20 damage. He is dead. Its current health -10
-
-
-enemy unit attacks:
-Evil Peasant is using a skill melee attack on: Necromancer with power 18
-Necromancer get 14 damage. Its current health 86
-enemy unit attacks:
-Peasant's son is using a skill range attack on: Necromancer with power 7
-Necromancer get 5 damage. Its current health 80
-enemy unit attacks:
-Sceleton is using a skill melee attack on: Necromancer with power 10
-Necromancer get 8 damage. Its current health 72
-enemy unit attacks:
-test_unit2 is using a skill melee attack on: Necromancer with power 10
-Necromancer get 8 damage. Its current health 64
-round 7
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 1 Peasant's son 
+poor: quant = 1, amount = 1, persent = 0.000500, mult = 2 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 1 Peasant's son 
+poor: quant = 1, amount = 1, persent = 0.001000, mult = 2 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 1 Peasant's dog 
+poor: quant = 1, amount = 1, persent = 0.001000, mult = 2 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
+умерло юнитов: 0 
 умерло юнитов: 0 
 умерло юнитов: 1 Sceleton 
-our army frontline 1, our army backline 0
-enemy army frontline 2, enemy army backline 1
-our army 1 units
-enemy army 3 units
-current range 0
-our unit attacks:
-Necromancer is using a skill melee attack on: test_unit2 with power 20
-test_unit2 get 20 damage. Its current health 40
-
-
-enemy unit attacks:
-Evil Peasant is using a skill melee attack on: Necromancer with power 18
-Necromancer get 14 damage. Its current health 50
-enemy unit attacks:
-Peasant's son is using a skill range attack on: Necromancer with power 7
-Necromancer get 5 damage. Its current health 44
-enemy unit attacks:
-test_unit2 is using a skill melee attack on: Necromancer with power 10
-Necromancer get 8 damage. Its current health 36
-round 8
-умерло юнитов: 0 
-умерло юнитов: 0 
-our army frontline 1, our army backline 0
-enemy army frontline 2, enemy army backline 1
-our army 1 units
-enemy army 3 units
-current range 0
-our unit attacks:
-Necromancer is using a skill melee attack on: Evil Peasant with power 20
-Evil Peasant get 20 damage. Its current health 30
-
-
-enemy unit attacks:
-Evil Peasant is using a skill melee attack on: Necromancer with power 18
-Necromancer get 14 damage. Its current health 22
-enemy unit attacks:
-Peasant's son is using a skill range attack on: Necromancer with power 7
-Necromancer get 5 damage. Its current health 16
-enemy unit attacks:
-test_unit2 is using a skill melee attack on: Necromancer with power 10
-Necromancer get 8 damage. Its current health 8
-round 9
-умерло юнитов: 0 
-умерло юнитов: 0 
-our army frontline 1, our army backline 0
-enemy army frontline 2, enemy army backline 1
-our army 1 units
-enemy army 3 units
-current range 0
-our unit attacks:
-Necromancer is using a skill melee attack on: test_unit2 with power 20
-test_unit2 get 20 damage. Its current health 20
-
-
-enemy unit attacks:
-Evil Peasant is using a skill melee attack on: Necromancer with power 18
-Necromancer get 14 damage. He is dead. Its current health -6
-enemy unit attacks:
-Peasant's son is using a skill range attack on: Necromancer with power 7
-Necromancer get 5 damage. He is dead. Its current health -12
-enemy unit attacks:
-test_unit2 is using a skill melee attack on: Necromancer with power 10
-Necromancer get 8 damage. He is dead. Its current health -20
-round 10
-умерло юнитов: 1 Necromancer 
-умерло юнитов: 0 
-our army frontline 0, our army backline 0
-enemy army frontline 2, enemy army backline 1
-we have lost the battle
-The battle is over
-start
-round 1
-умерло юнитов: 0 
-умерло юнитов: 0 
-our army frontline 1, our army backline 1
-enemy army frontline 3, enemy army backline 1
-our army 2 units
-enemy army 4 units
-current range 3
-our unit attacks:
-our unit attacks:
-
-
-enemy unit attacks:
-enemy unit attacks:
-enemy unit attacks:
-enemy unit attacks:
-round 2
-умерло юнитов: 0 
-умерло юнитов: 0 
-our army frontline 1, our army backline 1
-enemy army frontline 3, enemy army backline 1
-our army 2 units
-enemy army 4 units
-current range 2
-our unit attacks:
-Necromancer is using a skill range attack on: Sceleton with power 15
-Sceleton get 15 damage. Its current health 45
-our unit attacks:
-
-
-enemy unit attacks:
-enemy unit attacks:
-Peasant's son is using a skill range attack on: Sceleton with power 7
-Sceleton get 7 damage. Its current health 53
-enemy unit attacks:
-enemy unit attacks:
-round 3
-умерло юнитов: 0 
-умерло юнитов: 0 
-our army frontline 1, our army backline 1
-enemy army frontline 3, enemy army backline 1
-our army 2 units
-enemy army 4 units
-current range 1
-our unit attacks:
-Necromancer is using a skill range attack on: Evil Peasant with power 15
-Evil Peasant get 15 damage. Its current health 65
-our unit attacks:
-
-
-enemy unit attacks:
-enemy unit attacks:
-Peasant's son is using a skill range attack on: Sceleton with power 7
-Sceleton get 7 damage. Its current health 46
-enemy unit attacks:
-enemy unit attacks:
-round 4
-умерло юнитов: 0 
-умерло юнитов: 0 
-our army frontline 1, our army backline 1
-enemy army frontline 3, enemy army backline 1
-our army 2 units
-enemy army 4 units
-current range 0
-our unit attacks:
-Necromancer is using a skill range attack on: Evil Peasant with power 15
-Evil Peasant get 15 damage. Its current health 50
-our unit attacks:
-Sceleton is using a skill melee attack on: test_unit2 with power 10
-test_unit2 get 10 damage. Its current health 50
-
-
-enemy unit attacks:
-Evil Peasant is using a skill melee attack on: Sceleton with power 18
-Sceleton get 18 damage. Its current health 28
-enemy unit attacks:
-Peasant's son is using a skill range attack on: Sceleton with power 7
-Sceleton get 7 damage. Its current health 21
-enemy unit attacks:
-Sceleton is using a skill melee attack on: Sceleton with power 10
-Sceleton get 10 damage. Its current health 11
-enemy unit attacks:
-test_unit2 is using a skill melee attack on: Sceleton with power 10
-Sceleton get 10 damage. Its current health 1
-round 5
-умерло юнитов: 0 
-умерло юнитов: 0 
-our army frontline 1, our army backline 1
-enemy army frontline 3, enemy army backline 1
-our army 2 units
-enemy army 4 units
-current range 0
-our unit attacks:
-Necromancer is using a skill range attack on: test_unit2 with power 15
-test_unit2 get 15 damage. Its current health 35
-our unit attacks:
-Sceleton is using a skill melee attack on: Sceleton with power 10
-Sceleton get 10 damage. Its current health 35
-
-
-enemy unit attacks:
-Evil Peasant is using a skill melee attack on: Sceleton with power 18
-Sceleton get 18 damage. He is dead. Its current health -17
-enemy unit attacks:
-Peasant's son is using a skill range attack on: Sceleton with power 7
-Sceleton get 7 damage. He is dead. Its current health -24
-enemy unit attacks:
-Sceleton is using a skill melee attack on: Sceleton with power 10
-Sceleton get 10 damage. He is dead. Its current health -34
-enemy unit attacks:
-test_unit2 is using a skill melee attack on: Sceleton with power 10
-Sceleton get 10 damage. He is dead. Its current health -44
-round 6
-умерло юнитов: 1 Sceleton 
-умерло юнитов: 0 
-our army frontline 1, our army backline 0
-enemy army frontline 3, enemy army backline 1
-our army 1 units
-enemy army 4 units
-current range 0
-our unit attacks:
-Necromancer is using a skill melee attack on: test_unit2 with power 20
-test_unit2 get 20 damage. Its current health 15
-
-
-enemy unit attacks:
-Evil Peasant is using a skill melee attack on: Necromancer with power 18
-Necromancer get 14 damage. Its current health 86
-enemy unit attacks:
-Peasant's son is using a skill range attack on: Necromancer with power 7
-Necromancer get 5 damage. Its current health 80
-enemy unit attacks:
-Sceleton is using a skill melee attack on: Necromancer with power 10
-Necromancer get 8 damage. Its current health 72
-enemy unit attacks:
-test_unit2 is using a skill melee attack on: Necromancer with power 10
-Necromancer get 8 damage. Its current health 64
-round 7
-умерло юнитов: 0 
-умерло юнитов: 0 
-our army frontline 1, our army backline 0
-enemy army frontline 3, enemy army backline 1
-our army 1 units
-enemy army 4 units
-current range 0
-our unit attacks:
-Necromancer is using a skill melee attack on: test_unit2 with power 20
-test_unit2 get 20 damage. He is dead. Its current health -5
-
-
-enemy unit attacks:
-Evil Peasant is using a skill melee attack on: Necromancer with power 18
-Necromancer get 14 damage. Its current health 50
-enemy unit attacks:
-Peasant's son is using a skill range attack on: Necromancer with power 7
-Necromancer get 5 damage. Its current health 44
-enemy unit attacks:
-Sceleton is using a skill melee attack on: Necromancer with power 10
-Necromancer get 8 damage. Its current health 36
-enemy unit attacks:
-test_unit2 is using a skill melee attack on: Necromancer with power 10
-Necromancer get 8 damage. Its current health 28
-round 8
-умерло юнитов: 0 
-умерло юнитов: 1 test_unit2 
-our army frontline 1, our army backline 0
-enemy army frontline 2, enemy army backline 1
-our army 1 units
-enemy army 3 units
-current range 0
-our unit attacks:
-Necromancer is using a skill melee attack on: Sceleton with power 20
-Sceleton get 20 damage. Its current health 15
-
-
-enemy unit attacks:
-Evil Peasant is using a skill melee attack on: Necromancer with power 18
-Necromancer get 14 damage. Its current health 14
-enemy unit attacks:
-Peasant's son is using a skill range attack on: Necromancer with power 7
-Necromancer get 5 damage. Its current health 8
-enemy unit attacks:
-Sceleton is using a skill melee attack on: Necromancer with power 10
-Necromancer get 8 damage. He is dead. Its current health 0
-round 9
-умерло юнитов: 1 Necromancer 
-умерло юнитов: 0 
-our army frontline 0, our army backline 0
-enemy army frontline 2, enemy army backline 1
-we have lost the battle
-The battle is over
-start
+умерло юнитов: 1 Peasant's dog 

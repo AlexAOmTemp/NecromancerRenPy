@@ -1,6 +1,6 @@
 init python:
 
-    class army:
+    class Army:
         def __init__(self, name):
             self.name= name
             self.units= []
@@ -8,6 +8,7 @@ init python:
             self.backline=0
             self.army_range=0
             self.army_cap = 20
+            self.stillAlive = []
         def get_frontline_units(self):
             lst=[]
             for u in self.units:
@@ -36,7 +37,7 @@ init python:
             self.units.append(unit)
             if unit.line=="front":
                 if self.frontline < self.army_cap/2:
-                    self.frontline+=1;
+                    self.frontline+=1
                 else:
                     unit.line="back"
             if unit.line== "back":
@@ -44,6 +45,12 @@ init python:
             self.check_range()
 
         def regroup(self):
+            for u in self.get_frontline_units():
+                if u.priority_line == "back":
+                    u.line= "back"
+                    self.frontline-=1
+                    self.backline+=1
+
             for u in self.get_backline_units():
                 if self.frontline < self.army_cap/2:
                     if u.priority_line == "front":
@@ -73,6 +80,8 @@ init python:
             rem_ls=[]
             for s in self.units:
                 if s.isDead():
+                    if s.isAlive():
+                        self.stillAlive.append (s)
                     cnt+=1
                     str+="%s " % s.name
                     rem_ls.append (s)

@@ -1,52 +1,136 @@
 [
     {
-        "name": "event1_sv",
-        "max_times_happens": 5,
-        "blocks_events": [],
-        "needs_events": [],
-        "jump_to_label": "event_one",
-        "saveble": true,
-	"level": "normal",
-	"reward":{
-    		"rare":3,
-    		"items":["poor_sword","ржавый меч"],
-    		"gold": [100, 300]
-    	}
-    },
-    {
-        "name": "event2_rp",
+        "name": "Example",
         "max_times_happens": 0,
         "blocks_events": [],
         "needs_events": [],
-        "jump_to_label": "event_two",
+        "jump_to_label": "label_name",
         "saveble": false,
-	"level": "poor",
-	"reward":{
-    		"poor":1
-    	}
+        "level": "legendary",
+        "reward":{
+            "legendary":3,
+            "items":["poor_sword","ржавый меч"],
+            "gold": [100, 300]
+        },
+        "army":"army_name"
     },
     {
-        "name": "event3_sv",
+        "name": "Осада замка",
         "max_times_happens": 3,
         "blocks_events": [],
         "needs_events": [],
-        "jump_to_label": "event_three",
+        "jump_to_label": "castle_siege",
         "saveble": true,
-	"level": "magic",
-	"reward":{
-    		"magic":1
-    	}
+	    "level": "legendary",
+	    "reward":{
+    		"legendary":3
+    	},
+        "army":"legendary_human_army_3"
     },
     {
-        "name": "event4_sv",
+        "name": "Одинокий путник",
+        "max_times_happens": 0,
+        "blocks_events": [],
+        "needs_events": [],
+        "jump_to_label": "One_poor_man",
+        "saveble": false,
+	    "level": "poor",
+	    "reward":{
+    		"poor":1
+    	},
+        "army":"poor_human_army_1"
+    },
+    {
+        "name": "Всякий сброд",
+        "max_times_happens": 0,
+        "blocks_events": [],
+        "needs_events": [],
+        "jump_to_label": "Mess_party",
+        "saveble": false,
+	    "level": "poor",
+	    "reward":{
+    		"poor":3
+    	},
+        "army":"poor_human_army_3"
+    },
+
+    {
+        "name": "Группа крестьян",
+        "max_times_happens": 3,
+        "blocks_events": [],
+        "needs_events": [],
+        "jump_to_label": "Peasants_party",
+        "saveble": false,
+	    "level": "normal",
+	    "reward":{
+    		"normal":3
+    	},
+        "army":"normal_human_army_3"
+    },
+    {
+        "name": "Крестьянин со скрабом",
         "max_times_happens": 10,
         "blocks_events": [],
         "needs_events": [],
-        "jump_to_label": "event_four",
-        "saveble": true,
-	"level": "rare",
-	"reward":{
+        "jump_to_label": "Peasant_and_co",
+        "saveble": false,
+	    "level": "normal",
+	    "reward":{
+    		"normal":1
+    	},
+        "army":"normal_human_army_1"
+    },
+    {
+        "name": "Один в поле воин",
+        "max_times_happens": 3,
+        "blocks_events": [],
+        "needs_events": [],
+        "jump_to_label": "Brave_alone",
+        "saveble": false,
+	    "level": "magic",
+	    "reward":{
+    		"magic":1
+    	},
+        "army":"magic_human_army_1"
+    },
+    {
+        "name": "Копье в моей заднице",
+        "max_times_happens": 10,
+        "blocks_events": [],
+        "needs_events": [],
+        "jump_to_label": "My_pike_only",
+        "saveble": false,
+	    "level": "rare",
+	    "reward":{
     		"rare":1
-    	}
+    	},
+        "army":"rare_human_army_1"
+    },
+    {
+        "name": "Кто на шашлыки",
+        "max_times_happens": 10,
+        "blocks_events": [],
+        "needs_events": [],
+        "jump_to_label": "Pikemans_party",
+        "saveble": false,
+	    "level": "rare",
+	    "reward":{
+    		"rare":3
+    	},
+        "army":"rare_human_army_3"
+    },
+    {
+        "name": "Одинокий рыцарь",
+        "max_times_happens": 10,
+        "blocks_events": [],
+        "needs_events": [],
+        "jump_to_label": "Knight_alone",
+        "saveble": false,
+	    "level": "legendary",
+	    "reward":{
+    		"legendary":3
+    	},
+        "army":"legendary_human_army_1"
     }
+
 ]

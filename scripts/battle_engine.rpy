@@ -1,99 +1,109 @@
 
 init python:
 
-    def cast(our_unit, enemy_army, skill):
-        str = "%s is using a skill %s on: " % (our_unit.name, skill["name"] )
-        if skill["target"]== "enemy":
-            valid_targ = enemy_army.get_frontline_units()
-            quant = min (skill["targets quant"],len(valid_targ))
-            targets = random.sample (valid_targ, quant)
-            for t in targets:
-                str += "%s " % (t.name)
-            value = skill["value"]
-            dep_s = skill["depends self"] #if skill damage bases on our unit stat
-            for d in dep_s:
-                value+= vars (our_unit)[d] * dep_s[d]
-            str += "with power %d" %  (value)
-            logging(str)
-            dep_e= skill["depends enemy"] #if skill damage bases on enemy unit stat
-            add_dmg=[]
-            for t in targets:
-                ad=0
-                for d in dep_e:
-                    ad+=vars (t)[d] * dep_e[d]
-                add_dmg.append(ad)
+    class Battle:
+        def __init__ (self, player_army, enemy_army ):
+            self.player_army=player_army
+            self.enemy_army = enemy_army
+            self.round = 1
+            self.win = False
+            self.over = False
+            self.cur_range = max (self.player_army.army_range, self.enemy_army.army_range)
 
-            ef=search_in_list_by_name(effects_list, skill["effect"])
-            aff= ef["affect"]
-            eff= ef["effect"]
-            for t in targets:
-                i=0;
-                if eff=="+":
-                    vars (t)[aff]+=value+add_dmg[i]
-                elif eff=="-":
-                    if aff=="health":
-                       t.getDamage (value+add_dmg[i])
-                    else:
-                       vars (t)[aff]-=value+add_dmg[i]
-                elif eff=="*":
-                    vars (t)[aff]*=value+add_dmg[i]
-                elif eff=="/":
-                    vars (t)[aff]/=value+add_dmg[i]
-                i+=1
+        def isOver(self):
+            return self.over
 
-    def battle (our_army, enemy_army):
-        win = 0
-        round = 1
-        cur_range=max (our_army.army_range, enemy_army.army_range)
+        def isPlayerWon(self):
+            return self.win
 
-        while (True):
-            logging ("round %d"% round)
-            round+=1
-            our_army.bring_out_your_dead()
-            our_army.regroup()
-            enemy_army.bring_out_your_dead()
-            enemy_army.regroup()
-            logging ("our army frontline %d, our army backline %d" % (our_army.frontline, our_army.backline) )
-            logging ("enemy army frontline %d, enemy army backline %d" % (enemy_army.frontline, enemy_army.backline) )
-            if len(our_army.units)<=0 and len(enemy_army.units)<=0:
-                st="all units are dead\n"
-                win=2
-                break
-            if len(our_army.units)<=0:
-                st="we have lost the battle\n"
-                win=0
-                break
-            if len(enemy_army.units)<=0:
-                st="we have won the battle\n"
-                win=1
-                break
+
+        def next_round (self):
+            global Player_hero
+            #logging ("round %d"% round)
+            if self.isOver == True:
+                return
+            self.round+=1
+            self.player_army.bring_out_your_dead()
+            self.player_army.regroup()
+            self.enemy_army.bring_out_your_dead()
+            self.enemy_army.regroup()
+            #logging ("our army frontline %d, our army backline %d" % (self.player_army.frontline, self.player_army.backline) )
+            #logging ("enemy army frontline %d, enemy army backline %d" % (enemy_army.frontline, enemy_army.backline) )
+            if len(self.player_army.units)<=0 or Player_hero.isDead():
+                #logging ("we have lost the battle\n")
+                self.over = True
+                self.win = False
+                return
+            if len(self.enemy_army.units)<=0:
+                #logging ("we have won the battle\n")
+                self.over = True
+                self.win = True
+                return
             nvl_clear()
-            ln=len(our_army.units)
-            str="our army %d units\n" % (ln)
-            str+="enemy army %d units\n" % (len(enemy_army.units))
-            str+="current range %d" % (cur_range)
-            logging(str)
-            for u in our_army.units:
-                logging ("our unit attacks:")
-                if u.maxRange>=cur_range:
-                    sk=u.cast(cur_range)
+            #ln=len(self.player_army.units)
+            #str="our army %d units\n" % (ln)
+            #str+="enemy army %d units\n" % (len(enemy_army.units))
+            #str+="current range %d" % (self.cur_range)
+            #logging(str)
+            for u in self.player_army.units:
+                #logging ("our unit attacks:")
+                if u.maxRange>=self.cur_range:
+                    sk=u.cast(self.cur_range)
                     if sk!=0:
-                        cast(u, enemy_army, sk)
-            logging ("\n")
-            for u in enemy_army.units:
-                logging ("enemy unit attacks:")
-                if u.maxRange >= cur_range:
-                    sk=u.cast(cur_range)
+                        self.cast(u, enemy_army, sk)
+            #logging ("\n")
+            for u in self.enemy_army.units:
+                #logging ("enemy unit attacks:")
+                if u.maxRange >= self.cur_range:
+                    sk=u.cast(self.cur_range)
                     if sk!=0:
-                        cast(u, our_army, sk)
-            if cur_range>0:
-                cur_range-=1;
-        st+="The battle is over"
-        logging(st)
-        e(st)
-        return win
+                        self.cast(u, self.player_army, sk)
+            if self.cur_range>0:
+                self.cur_range-=1;
+        #st+="The battle is over"
+        #logging(st)
+        #e(st)
 
-        logging ("battle")
+        def cast(self, caster, enemy_army, skill):
+            #str = "%s is using a skill %s on: " % (caster.name, skill["name"] )
+            if skill["target"]== "enemy":
+                valid_targ = enemy_army.get_frontline_units()
+                quant = min (skill["targets quant"],len(valid_targ))
+                targets = random.sample (valid_targ, quant)
+                #for t in targets:
+                #    str += "%s " % (t.name)
+                value = skill["value"]
+                dep_s = skill["depends self"] #if skill damage bases on our unit stat
+                for d in dep_s:
+                    value+= vars (caster)[d] * dep_s[d]
+                #str += "with power %d" %  (value)
+                #logging(str)
+                dep_e= skill["depends enemy"] #if skill damage bases on enemy unit stat
+                add_dmg=[]
+                for t in targets:
+                    ad=0
+                    for d in dep_e:
+                        ad+=vars (t)[d] * dep_e[d]
+                    add_dmg.append(ad)
+
+                ef=search_in_list_by_name(effects_list, skill["effect"])
+                aff= ef["affect"]
+                eff= ef["effect"]
+                for t in targets:
+                    i=0;
+                    if eff=="+":
+                        vars (t)[aff]+=value+add_dmg[i]
+                    elif eff=="-":
+                        if aff=="health":
+                           t.getDamage (value+add_dmg[i])
+                        else:
+                           vars (t)[aff]-=value+add_dmg[i]
+                    elif eff=="*":
+                        vars (t)[aff]*=value+add_dmg[i]
+                    elif eff=="/":
+                        vars (t)[aff]/=value+add_dmg[i]
+                    i+=1
+    logging ("battle")
 
 
 
@@ -102,11 +112,11 @@ init python:
 #
 # label start:
 #     "start"
-#     $my_army = army("Glory Army")
+#     $my_army = Army("Glory Army")
 #     $my_army.add_unit( unit (search(units_list, "Necromancer") ) )
 #     $my_army.add_unit( unit (search(units_list, "Sceleton") ) )
 #
-#     $enemy_army = army("Bad guys")
+#     $enemy_army = Army("Bad guys")
 #     $enemy_army.add_unit(unit (search(units_list, "Evil Peasant") ) )
 #     $enemy_army.add_unit(unit (search(units_list, "Peasant's son") ) )
 #

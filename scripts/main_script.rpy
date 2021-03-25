@@ -10,12 +10,13 @@ init -1 python: #before classes initiate, read some files and global variables
 
 
     slots = ("weapon", "armor", "helmet", "range_weapon", "boots", "left ring", "right ring", "amulet")
-    rarity = ("poor","normal","magic","rare","legendary")
+    rarity = ["poor","normal","magic","rare","legendary"]
 
     effects_list = lst_from_file (renpy.loader.transfn("resources/effects.txt") )
     skill_list = lst_from_file (renpy.loader.transfn("resources/skills.txt") )
     units_list= lst_from_file (renpy.loader.transfn("resources/units.txt") )
     item_list = lst_from_file (renpy.loader.transfn('resources/items.txt') )
+    army_list = lst_from_file (renpy.loader.transfn("resources/armies.txt"))
 
     resources_endless_list = lst_from_file(renpy.loader.transfn('resources/res_endless.txt') )
     resources_countable_list = lst_from_file (renpy.loader.transfn('resources/res_countable.txt') )
@@ -44,11 +45,20 @@ init 1 python:
         global event_started
         global event_ended
         global game_over
+        global map_cells_ls
+        global list_of_undead
+        global Player_hero
+        list_of_undead=[]
+
+        for u in units_list:
+            if u['type'] == "undead":
+                list_of_undead.append(u)
 
         reward_generator=reward_gen()
-        currency= currency_class()
-        players_army = army("Glory Army")
-        players_army.add_unit( unit (search_in_list_by_name (units_list, "Necromancer") ) )
+        currency= Currency()
+        players_army = Army("Glory Army")
+        Player_hero =  unit (search_in_list_by_name (units_list, "Necromancer") )
+        players_army.add_unit( Player_hero)
         players_army.add_unit( unit (search_in_list_by_name (units_list, "Sceleton") ) )
 
         current_cell_name = ""
@@ -56,8 +66,16 @@ init 1 python:
         event_ended = False
         game_over = False
 
-
-
+        map_cells_ls = cells_list ()
+        events_to_cells()
+        # for c in map_cells_ls:
+        #     st= "%s [" %c.name
+        #     for ev in c.saveble_events:
+        #         st+=(ev.name+' ')
+        #     st+= "]"
+        #     logging (st)
+        #
+        # test_army_gen()
 
 init python:
     def onCellClicked (cell_name):
@@ -94,7 +112,6 @@ label cell_menu:
         elif (choise==1):
             renpy.jump("main_map")
         else:
-            e("choise %s" % str(choise) )
             unfinished_started = True
             current_cell.start_unfinished(choise-2)
     python:
@@ -113,7 +130,8 @@ label sleep:
 
 
 label army:
-    "You're in the army now."
+    "Ваша армия, сэр"
+    call screen main_army_screen()
     jump main_map
 
 
@@ -141,6 +159,9 @@ label journal:
     jump main_map
 
 label next_day:
+    python:
+        for u in players_army.units:
+            u.health= u.max_health
     $currency.activity=3
     $currency.day+=1
     jump main_map
@@ -153,9 +174,79 @@ label items:
     #    if len(current_cell.unfinished_events) != 0:
     jump journal
 
+$units_for_rec=[]
+label battle_field:
 
+    $result = False
+    $enemy_army = generate_army( search_in_list_by_name (army_list, current_cell.current_event.army ) )
+    if len (enemy_army.units) == 0:
+        "вражеская армия трусливо сбежала"
+    elif len (players_army.units) == 0:
+        "у вас нет армии"
+    else:
+        $new_battle = Battle ( players_army, enemy_army)
+        $global units_for_rec
+        $units_for_rec = []
+        while (not new_battle.isOver()):
+            show screen battle_screen (new_battle)
+            pause(1)
+            $new_battle.next_round()
+        $result = new_battle.isPlayerWon()
+        $units_for_rec=enemy_army.stillAlive
+        if not result:
+            jump game_over
+        else:
+            jump resurrection
+    return
+
+label resurrection:
+    hide screen battle_screen
+    show screen reccurection_screen
+    nvl clear
+    python:
+        global units_for_rec
+        global players_army
+        global list_of_undead
+        if len (units_for_rec) > 0:
+            while len(menu_items)>2:
+                menu_items=[]
+                menu_items.append ( (("Некоторые враги все еще живы, хотя тяжело ранены\nВы можете преобразить их в своих войнов."), None ))
+                menu_items.append (( ("Не нужны мне лузеры в армии!"), 0))
+                i=1
+                if len(units_for_rec)>0:
+                    for u in units_for_rec:
+                        menu_items.append ( ( ("%s" %  u.name ) , i ))
+                        i+=1
+                else:
+                    break
+
+                choise =  renpy.display_menu( menu_items )
+
+                if choise == 0:
+                    break
+                availible_units=[]
+                i=1
+                menu_it=[]
+                menu_it.append( ("Кого из него сделаем, босс?" , None) )
+                menu_it.append( ("Нафиг этого чмошника", 0) )
+                for u in list_of_undead:
+                    urar=u["rarity"]
+                    ch_urar= units_for_rec[choise-1].rarity
+                    if rarity.index (urar) <= rarity.index(ch_urar):
+                        availible_units.append(u)
+                        menu_it.append( (( "%s"% u["name"]), i ) )
+                        i+=1
+                ch =  renpy.display_menu( menu_it )
+                if (ch>0):
+                    un=unit(availible_units[ch-1])
+                    players_army.add_unit( un )
+                    players_army.regroup()
+                    e("Вы создали [un.name]")
+                units_for_rec.remove(units_for_rec[choise-1])
+
+    return
 
 label game_over:
     $game_over = True
-    "e""The game is over, You lost."
+    "Вот так славная история славного некроманта бесславно оборвалась. Рэст ин пис. Вайа кон диос. Аминь!"
     jump main_map

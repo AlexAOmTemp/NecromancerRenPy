@@ -1,0 +1,107 @@
+[
+    {
+        "units_with_teg": ["human"],
+        "amount": 1,
+        "exclude_units": [],
+        "name": "poor_human_army_1",
+        "units": [ "" ],
+        "rarity": "poor"
+    },
+    {
+        "units_with_teg": ["human"],
+        "amount": 2,
+        "exclude_units": [],
+        "name": "poor_human_army_2",
+        "units": [ "" ],
+        "rarity": "poor"
+    },
+    {
+        "units_with_teg": ["human"],
+        "amount": 3,
+        "exclude_units": [],
+        "name": "poor_human_army_3",
+        "units": [ "" ],
+        "rarity": "poor"
+    },
+    {
+        "units_with_teg": ["human"],
+        "amount": 1,
+        "exclude_units": [],
+        "name": "normal_human_army_1",
+        "units": [""],
+        "rarity": "normal"
+    },
+    {
+        "units_with_teg": ["human"],
+        "amount": 2,
+        "exclude_units": [],
+        "name": "normal_human_army_2",
+        "units": [""],
+        "rarity": "normal"
+    },
+    {
+        "units_with_teg": ["human"],
+        "amount": 3,
+        "exclude_units": [],
+        "name": "normal_human_army_3",
+        "units": [""],
+        "rarity": "normal"
+    },
+    {
+        "units_with_teg": ["human"],
+        "amount": 1,
+        "exclude_units": [],
+        "name": "magic_human_army_1",
+        "units": [""],
+        "rarity": "magic"
+    },
+    {
+        "units_with_teg": ["human"],
+        "amount": 2,
+        "exclude_units": [],
+        "name": "magic_human_army_2",
+        "units": [""],
+        "rarity": "magic"
+    },
+    {
+        "units_with_teg": ["human"],
+        "amount": 3,
+        "exclude_units": [],
+        "name": "magic_human_army_3",
+        "units": [""],
+        "rarity": "magic"
+    },
+    {
+        "units_with_teg": ["human"],
+        "amount": 1,
+        "exclude_units": [],
+        "name": "rare_human_army_1",
+        "units": [""],
+        "rarity": "rare"
+    },
+    {
+        "units_with_teg": ["human"],
+        "amount": 2,
+        "exclude_units": [],
+        "name": "rare_human_army_2",
+        "units": [""],
+        "rarity": "rare"
+    },
+    {
+        "units_with_teg": ["human"],
+        "amount": 1,
+        "exclude_units": [],
+        "name": "legendary_human_army_1",
+        "units": [],
+        "rarity": "legendary"
+    },
+    {
+        "units_with_teg": ["human"],
+        "amount": 3,
+        "exclude_units": [],
+        "name": "legendary_human_army_3",
+        "units": [],
+        "rarity": "legendary"
+    }
+
+]
