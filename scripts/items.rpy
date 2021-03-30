@@ -5,5 +5,5 @@ init python:
 
     logging ("items")
     items_by_names = init_items_list()
-    for id, val in enumerate(items_by_names):
-        logging ("%d %s"%(id, val))
+    # for id, val in enumerate(items_by_names):
+    #     logging ("%d %s"%(id, val))

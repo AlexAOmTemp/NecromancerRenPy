@@ -1,4 +1,4 @@
-init -3 python:
+init -6 python:
     def dice_100():
         dice=random.randint(1,100)
         return dice

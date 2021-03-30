@@ -14,7 +14,7 @@ init python:
     # "rarity": "magic",
     # "amount": 3
     # }]
-    
+
     def generate_army ( parameters):
         units = []
         new_army = Army(parameters["name"])
@@ -41,7 +41,7 @@ init python:
                 quant = int (max (round (amount*persent*mult),round(amount)) )
             else:
                 quant = int (round (amount*persent*mult) )
-            logging ("%s: quant = %d, amount = %d, persent = %f, mult = %d "% (rarity[f], quant, amount, persent, mult) )
+            # logging ("%s: quant = %d, amount = %d, persent = %f, mult = %d "% (rarity[f], quant, amount, persent, mult) )
             mult*=2
             if len(ls)>0:
                 for i in range (quant):
@@ -54,7 +54,7 @@ init python:
         saveday=currency.day
         saverep = currency.reputation
         while (currency.day<=currency.maxday):
-            logging ("\nday %d"% currency.day )
+            # logging ("\nday %d"% currency.day )
             for ar in army_test:
                 army=generate_army(ar)
                 st="%s "%army.name

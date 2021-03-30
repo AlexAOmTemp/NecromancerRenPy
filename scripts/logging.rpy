@@ -1,5 +1,5 @@
 
-init -2 python:
+init -6 python:
     import codecs
     def logging (string_to_log):
         with open(renpy.loader.transfn('resources/log.txt'),"a+") as fh:

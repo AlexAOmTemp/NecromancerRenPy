@@ -39,7 +39,7 @@ init python:
             return items , gold
 
         def generate(self, rew_rarity):
-            it_quant = random.randint(0,2)
+            it_quant = random.randint(0,1)
             items=[]
             if it_quant>0:
                 for i in range (it_quant):

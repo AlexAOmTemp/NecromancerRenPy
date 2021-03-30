@@ -4,6 +4,7 @@ label start:
     python:
         initVariables()
         logging ("start")
+    # call screen fonts_tast_screen
     jump main_map
 
 label main_map:

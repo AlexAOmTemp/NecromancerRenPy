@@ -108,14 +108,14 @@
 "skills": ["melee attack"]
 },{
 "type": "human",
-"name": "Peasant's dog",
+"name": "Yong peasant",
 "health": 45,
 "armor": 0.0,
 "block": 0.0,
 "dmg_melee": 9,
 "dmg_range": 0,
 "line": "front",
-"resurrectable" : false,
+"resurrectable" : true,
 "rarity" : "poor",
 "skills": ["melee attack"]
 },{

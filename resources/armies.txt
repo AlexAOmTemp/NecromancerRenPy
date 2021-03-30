@@ -81,9 +81,9 @@
     },
     {
         "units_with_teg": ["human"],
-        "amount": 2,
+        "amount": 3,
         "exclude_units": [],
-        "name": "rare_human_army_2",
+        "name": "rare_human_army_3",
         "units": [""],
         "rarity": "rare"
     },

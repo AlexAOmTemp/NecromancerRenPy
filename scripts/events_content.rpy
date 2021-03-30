@@ -1,26 +1,17 @@
 
-label a1_dialog:
-    "its sucks to see you here"
-    menu:
-        "What should I do?"
-        "Drink coffee.":
-            "I drink the coffee, and it's good to the last drop."
-        "Drink tea.":
-            "suck"
-    return
-
 label castle_siege:
-    "Вы приближаетесь к вражескому замку. Его охраняют рыцари и их слуги"
     menu:
+        "Вы приближаетесь к вражескому замку. Его охраняют рыцари и их слуги"
         "Штурм":
             call battle_field
             $event_ended = True
         "Мудрое отступление":
             $event_ended = False
     return
+
 label Mess_party:
-    "Вы встретили группу лохов"
     menu:
+        "Вы встретили группу лохов"
         "Опустить":
             call battle_field
             $event_ended = True
@@ -29,8 +20,8 @@ label Mess_party:
     return
 
 label Peasants_party:
-    "Кучка крестьян с вилами, выглядит устрашающе"
     menu:
+        "Кучка крестьян с вилами, выглядит устрашающе"
         "Навалять им":
             call battle_field
             $event_ended = True
@@ -39,8 +30,8 @@ label Peasants_party:
     return
 
 label Peasant_and_co:
-    "Крестьянин с семьей, отличный зомбак выйдет"
     menu:
+        "Крестьянин с семьей, отличный зомбак выйдет"
         "Гасить!":
             call battle_field
             $event_ended = True
@@ -49,8 +40,8 @@ label Peasant_and_co:
     return
 
 label Brave_alone:
-    "Вы подглядываете из-за куста за каким то челом. Похоже это тренированный войн."
     menu:
+        "Вы подглядываете из-за куста за каким то челом. Похоже это тренированный войн."
         "Напасть из кустов":
             call battle_field
             $event_ended = True
@@ -58,8 +49,8 @@ label Brave_alone:
             $event_ended = False
     return
 label My_pike_only:
-    "Мужик несет кабанчика наколотого на пику. Одет в военную форму, наверно слабак!"
     menu:
+        "Мужик несет кабанчика наколотого на пику. Одет в военную форму, наверно слабак!"
         "Мужик, еда есть? А если найду?":
             call battle_field
             $event_ended = True
@@ -67,29 +58,56 @@ label My_pike_only:
             $event_ended = False
     return
 label Pikemans_party:
-    "Несколько парней сидят вокруг костра и жарят на пиках шашлык."
     menu:
+        "Несколько парней сидят вокруг костра и жарят на пиках шашлык."
         "Пахнет вкусно. Эй парни, огоньку не найдется?":
             call battle_field
             $event_ended = True
         "Я вообще то вегетарианец, пойду по своим делам.":
             $event_ended = False
     return
+
 label Knight_alone:
-    "Кажется это настоящий рыцарь. Можно сказать одинокий... ну не считая кортежа слуг конечно"
     menu:
+        "Кажется это настоящий рыцарь. Можно сказать одинокий... ну не считая кортежа слуг конечно"
         "Слыш паря, давай раз на раз! Только ты, я и моя армия!":
             call battle_field
             $event_ended = True
         "Нет, это, конечно, не Ланселот Озерный, о такую мелочь даже руки пачкать не буду.":
             $event_ended = False
     return
+
 label One_poor_man:
-    "Захудалый одинокий противник, можно поразмяться"
     menu:
+        "Захудалый одинокий противник, можно поразмяться"
         "К бою, моя великая орда!":
             call battle_field
             $event_ended = True
         "Неспортивно как то, мне бы сотню другую разогнать...":
+            $event_ended = False
+    return
+
+label Tumbstone:
+    menu:
+        "Вы нашли одинокую могилу, если ее раскопать можно попробовать создать скелета из давно иссохшегося трупа"
+        "О да, я обожаю копать, в детстве мечтал стать шахтером!":
+            $players_army.add_unit( unit (search_in_list_by_name (units_list, "Sceleton") ) )
+            $players_army.regroup()
+            "Вы создали скелета."
+            if (dice_100() > 50):
+                "Стоило вам закончить с ритуалом, как вы услышали голос сзади: Эй, чувак, а ты чего это с моим дедом делаешь?"
+                call battle_field
+            $event_ended = True
+        "Осквернение могил? Я кто по вашему - Лора Крафт, известнейшая расхитительница мавзолеев?":
+            $event_ended = False
+    return
+
+label warriors:
+    menu:
+        "Вы видите 3 парней с мечами на сцене цирка"
+        "Эй парни, дай покажу как надо!":
+            call battle_field
+            $event_ended = True
+        "Пусть прыгают, нам не до них.":
             $event_ended = False
     return

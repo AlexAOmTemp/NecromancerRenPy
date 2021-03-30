@@ -9,6 +9,7 @@ init offset = -1
 ## Styles
 ################################################################################
 
+
 style default:
     properties gui.text_properties()
     language gui.language
@@ -100,9 +101,8 @@ screen say(who, what):
 
     window:
         id "window"
-
+        background None
         if who is not None:
-
             window:
                 id "namebox"
                 style "namebox"
@@ -204,40 +204,36 @@ style input:
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#choice
 
-screen choice(items):
-    style_prefix "choice"
+# screen choice(items):
+#     style_prefix "choice"
+#
+#     vbox:
+#         for i in items:
+#             textbutton i.caption action i.action
 
-    vbox:
-        for i in items:
-            textbutton i.caption action i.action
 
-            #if i.caption[0] == ' ': # внутри кавычек пробел!
-            #    textbutton i.caption[1:] action None
-            #else:
-            #    textbutton i.caption action i.action
 
 
 ## When this is true, menu captions will be spoken by the narrator. When false,
 ## menu captions will be displayed as empty buttons.
-define config.narrator_menu = True
-
-
-style choice_vbox is vbox
-style choice_button is button
-style choice_button_text is button_text
-
-style choice_vbox:
-    xalign 0.5
-    ypos 270
-    yanchor 0.5
-
-    spacing gui.choice_spacing
-
-style choice_button is default:
-    properties gui.button_properties("choice_button")
-
-style choice_button_text is default:
-    properties gui.button_text_properties("choice_button")
+# define config.narrator_menu = False
+#
+# style choice_vbox is vbox
+# style choice_button is button
+# style choice_button_text is button_text
+#
+# style choice_vbox:
+#     xalign 0.5
+#     ypos 270
+#     yanchor 0.5
+#
+#     spacing gui.choice_spacing
+#
+# style choice_button is default:
+#     properties gui.button_properties("choice_button")
+#
+# style choice_button_text is default:
+#     properties gui.button_text_properties("choice_button")
 
 
 ## Quick Menu screen ###########################################################
@@ -273,7 +269,7 @@ screen quick_menu():
 init python:
     config.overlay_screens.append("quick_menu")
 
-default quick_menu = True
+default quick_menu = False
 
 style quick_button is default
 style quick_button_text is button_text
@@ -305,27 +301,15 @@ screen navigation():
         spacing gui.navigation_spacing
 
         if main_menu:
-
             textbutton _("Start") action Start()
-
-        else:
-
-            textbutton _("History") action ShowMenu("history")
-
-            textbutton _("Save") action ShowMenu("save")
-
         textbutton _("Load") action ShowMenu("load")
-
+        if not main_menu:
+            textbutton _("Save") action ShowMenu("save")
         textbutton _("Preferences") action ShowMenu("preferences")
-
         if _in_replay:
-
             textbutton _("End Replay") action EndReplay(confirm=True)
-
         elif not main_menu:
-
             textbutton _("Main Menu") action MainMenu()
-
         textbutton _("About") action ShowMenu("about")
 
         if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
@@ -425,7 +409,7 @@ style main_menu_version:
 screen game_menu(title, scroll=None, yinitial=0.0):
 
     style_prefix "game_menu"
-
+    $logging ("%s: %s"%(title, main_menu))
     if main_menu:
         add gui.main_menu_background
     else:
@@ -502,11 +486,12 @@ style game_menu_label_text is gui_label_text
 style return_button is navigation_button
 style return_button_text is navigation_button_text
 
-style game_menu_outer_frame:
-    bottom_padding 30
-    top_padding 120
-
-    background "gui/overlay/game_menu.png"
+# style game_menu_outer_frame:
+#     bottom_padding 30
+#     top_padding 120
+#
+#     # background "gui/overlay/game_menu.png"
+#     background main_menu_image
 
 style game_menu_navigation_frame:
     xsize 280
@@ -638,7 +623,6 @@ screen file_slots(title):
                 for i in range(gui.file_slot_cols * gui.file_slot_rows):
 
                     $ slot = i + 1
-
                     button:
                         action FileAction(slot)
 
@@ -1454,14 +1438,17 @@ style nvl_window:
     variant "small"
     background "gui/phone/nvl.png"
 
-style main_menu_frame:
-    variant "small"
-    background "gui/phone/overlay/main_menu.png"
 
-style game_menu_outer_frame:
-    variant "small"
-    background "gui/phone/overlay/game_menu.png"
 
+
+# style main_menu_frame:
+#     variant "small"
+#     # background "gui/phone/overlay/main_menu.png"
+#     background main_menu_image
+# style game_menu_outer_frame:
+#     variant "small"
+#     # background "gui/phone/overlay/game_menu.png"
+#     background main_menu_image
 style game_menu_navigation_frame:
     variant "small"
     xsize 340
@@ -1517,69 +1504,3 @@ style slider_pref_vbox:
 style slider_pref_slider:
     variant "small"
     xsize 600
-###################
-
-
-
-
-# screen planets():
-#     default tt = Tooltip("No button selected.")
-#     imagemap:
-#
-#
-#         # ground im.Scale("map.png", config.screen_width, config.screen_height)
-#         # hover im.Scale("images/map hover.png",  config.screen_width, config.screen_height)
-#         ground "map.png"
-#         hover "map hover.png"
-#         hotspot (252, 454, 287, 249): #the capital
-#             clicked Jump("capital")
-#             hovered tt.Action("The loneliest number.")
-#
-#         hotspot (337, 50, 137, 175) clicked Jump("top_castle") #top castle
-#         hotspot (470, 233, 55, 215) clicked Jump("the_road") #the road
-#         hotspot (556, 206, 238, 88) clicked Jump("field") #field
-#         hotspot (655, 300, 178, 167) clicked Jump("mid_castle") #mid castle
-#         hotspot (832, 493, 190, 191) clicked Jump("bot_castle") #bot castle
-#         hotspot (798, 4, 104, 144) clicked Jump("mine") #mine
-#         hotspot (883, 161, 101, 126) clicked Jump("free_town") #free town
-#         hotspot (1132, 333, 85, 88) clicked Jump("free_village") #free village
-#         hotspot (986, 172, 134, 159) clicked Jump("ruins") #ruins
-#         hotspot (1116, 443, 162, 275) clicked Jump("forest") #forest
-
-
-
-# screen tooltip_test():
-#
-#     default tt = Tooltip("No button selected.")
-#
-#     frame:
-#         xfill True
-#
-#         has vbox
-#
-#         textbutton "One.":
-#             action Return(1)
-#             hovered tt.Action("The loneliest number.")
-#
-#         textbutton "Two.":
-#             action Return(2)
-#             hovered tt.Action("Is what it takes.")
-#
-#         textbutton "Three.":
-#             action Return(3)
-#             hovered tt.Action("A crowd.")
-#
-#         text tt.value
-
-# screen test_frame():
-#     frame:
-#         xpadding 10
-#         ypadding 10
-#         xalign 0.5
-#         yalign 0.5
-#
-#         vbox:
-#             text "Display"
-#             null height 10
-#             textbutton "Fullscreen" action Preference("display", "fullscreen")
-#             textbutton "Window" action Preference("display", "window")

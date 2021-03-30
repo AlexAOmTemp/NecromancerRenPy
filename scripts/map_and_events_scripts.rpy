@@ -17,8 +17,10 @@ init python:
 
         def happens (self):
             global event_ended
+            global menu_title
             event_ended = False
-            e ("Начало события \"%s\"."%(self.name))
+            # narrator ("Начало события \"%s\"."%(self.name))
+            menu_title = "%s" % (self.name)
             renpy.call ( self.jump_to_label)
 
         def is_valid (self):
@@ -70,6 +72,7 @@ init python:
                 event_cancelled= not event_ended
                 if (event_ended):
                     self.getRewardforCurrentEvent()
+                    event_description=""
                 if self.current_event.saveble:
                     if event_cancelled:
                         self.unfinished_events.append (self.current_event)
@@ -78,7 +81,7 @@ init python:
                 #logging("finish_event\n"+repr(self)+"\n\n")
 
             def start_unfinished (self, position):
-                logging("%s" % type(position))
+                # logging("%s" % type(position))
                 self.current_event=self.unfinished_events[int(position)]
                 st=[]
                 for i in range(len(self.unfinished_events)):
@@ -105,14 +108,19 @@ init python:
             def getRewardforCurrentEvent(self):
                 nvl_clear()
                 e ("событие пройдено")
+                event_description=""
                 it, gld = reward_generator.getReward(self.current_event.reward)
                 currency.items += it
                 currency.money += gld
-                st=("получена награда!\nзолото: %d\n" % gld)
-                if len(it)>0:
-                    toStr = ''.join([(str(elem)+'\n') for elem in it])
-                    st+=toStr
-                e (st)
+                st=""
+                if len (it)>0 or gld>0:
+                    st+=("получена награда!")
+                    if gld>0:
+                        st+=("\nзолото: %d\n" % gld)
+                    if len(it)>0:
+                        toStr = ''.join([(str(elem)+'\n') for elem in it])
+                        st+=toStr
+                    e (st)
 
 
 
@@ -148,7 +156,7 @@ init python:
                     i=0
                     j=0
                     random.shuffle(cells)
-                    logging ( "%s %s" % (ev["name"],types) )
+                    # logging ( "%s %s" % (ev["name"],types) )
                     while (i<ev["max_times_happens"]):
                         cells[j].saveble_events.append(event(ev))
                         i+=1

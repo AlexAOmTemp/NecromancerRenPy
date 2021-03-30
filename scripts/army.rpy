@@ -9,6 +9,7 @@ init python:
             self.army_range=0
             self.army_cap = 20
             self.stillAlive = []
+            self.reward_exp = 0
         def get_frontline_units(self):
             lst=[]
             for u in self.units:
@@ -50,6 +51,7 @@ init python:
                     u.line= "back"
                     self.frontline-=1
                     self.backline+=1
+            print (self.get_backline_units())
 
             for u in self.get_backline_units():
                 if self.frontline < self.army_cap/2:
@@ -58,8 +60,10 @@ init python:
                         self.frontline+=1
                         self.backline-=1
 
-            while self.frontline<self.backline:
-                for u in self.units:
+            ls=self.get_backline_units()
+            ls.reverse()
+            while self.frontline < self.backline:
+                for u in ls:
                     if u.line == "back":
                         u.toFrontline()
                         self.backline-=1
@@ -80,6 +84,7 @@ init python:
             rem_ls=[]
             for s in self.units:
                 if s.isDead():
+                    self.reward_exp += 2 + (2* rarity.index (s.rarity) ) # 2-9
                     if s.isAlive():
                         self.stillAlive.append (s)
                     cnt+=1
@@ -87,7 +92,7 @@ init python:
                     rem_ls.append (s)
             for s in rem_ls:
                 self.remove_unit(s)
-            logging ("умерло юнитов: %d %s"% (cnt,str) )
+            # logging ("умерло юнитов: %d %s"% (cnt,str) )
             self.check_range()
 
         def __str__(self):
