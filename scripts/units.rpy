@@ -2,6 +2,7 @@ init python:
     class unit:
         expForNextLvlMultiple = 1.4
         expForFirstLvlUp = 10
+        displayble = ['name','unit_type','rarity','armor','block','dmg_melee', 'dmg_range', 'maxRange']
         def __init__(self, unit_params):
             self.unit_type = unit_params["type"]
             self.name = unit_params ["name"]
@@ -22,6 +23,7 @@ init python:
             self.rarity = unit_params["rarity"]
             self.level = 1
             self.experience = 0
+            self.required_exp = int ( round (self.expForFirstLvlUp * (self.expForNextLvlMultiple**(self.level-1))))
             self.level_cap = 5
 
             for sc in unit_params ["skills"]:
@@ -37,6 +39,11 @@ init python:
             while self.experience >= required_exp :
                 self.experience -= required_exp
                 self.lvlUp()
+        def changePriorityLine(self):
+            if self.priority_line == "front":
+                self.priority_line = "back"
+            else:
+                self.priority_line = "front"
 
         def lvlUp ( self):
             if self.level < self.level_cap:

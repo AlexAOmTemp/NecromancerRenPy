@@ -71,7 +71,6 @@ init 1 python:
         global Player_hero
         global menu_title #for chose screen
         global event_description #for chose screen
-
         list_of_undead=[]
 
         for u in units_list:
@@ -95,6 +94,7 @@ init 1 python:
         events_to_cells()
         menu_title=[]
         event_description=""
+
         # for c in map_cells_ls:
         #     st= "%s [" %c.name
         #     for ev in c.saveble_events:
@@ -166,8 +166,7 @@ label sleep:
 
 
 label army:
-    "Ваша армия, сэр"
-    call screen main_army_screen()
+    call screen army_main_screen()
     jump main_map
 
 

@@ -6,35 +6,36 @@ image PlayerBack  = im.FactorScale(im.Scale("icons/PlayerBack.png",120,120), sca
 screen battle_screen ( battle):
     frame:
         text battle.player_army.name
-        xalign 0.1
+        yalign 0.9
     frame:
         text battle.enemy_army.name
-        xalign 0.9
+        yalign 0.1
 
-    hbox:
+    vbox:
         xalign 0.5
         yalign 0.5
         spacing 20+ 100 * battle.cur_range
-        use army_screen (battle.player_army)
-        use army_screen (battle.enemy_army, True)
+        use army_screen (battle.enemy_army)
+        use army_screen (battle.player_army, True)
+
 
 
 screen army_screen (army, reverse = False):
 
     if reverse:
-        hbox:
+        vbox:
             spacing 10
-            use line_screen ("EnemyFront", army.get_frontline_units())
-            use line_screen ("EnemyBack", army.get_backline_units())
-    else:
-        hbox:
-            spacing 10
-            use line_screen ("PlayerBack", army.get_backline_units())
             use line_screen ("PlayerFront", army.get_frontline_units())
+            use line_screen ("PlayerBack", army.get_backline_units())
+    else:
+        vbox:
+            spacing 10
+            use line_screen ("EnemyBack", army.get_backline_units())
+            use line_screen ("EnemyFront", army.get_frontline_units())
 
 
 screen line_screen (army_line_image, army_line):
-    vbox:
+    hbox:
         spacing scaled(10)
         image army_line_image
         # text army_line_name
