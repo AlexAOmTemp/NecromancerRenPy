@@ -1,3 +1,13 @@
+# {color=#f00}Red{/color}, {color=#00ff00}Green{/color}, {color=#0000ffff}Blue{/color}
+# Black	 	#000
+# White	 	#ffffff
+# Medium Gray	#808080
+# Aqua	 	#008080
+# Navy Blue	#000080
+# Green	 	#00ff00
+# Orange	 	#ffa500
+# Yellow	 	#ffff00
+# red         #f00
 
 
 define gui.text_color = '#000000'

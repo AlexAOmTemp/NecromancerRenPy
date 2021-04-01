@@ -1,7 +1,10 @@
 
 define e = Character("Eileen", kind=nvl)
 define narrator = Character (None, what_slow_cps=0)
-
+# permanent = {
+# "name": "Sceleton archer",
+# "stat": ""
+# }
 
 default _game_menu_screen = 'load_screen'
 
@@ -12,8 +15,7 @@ default _game_menu_screen = 'load_screen'
 init -3 python: #before classes initiate, read some files and global variables
     import json
     import random
-
-    slots = ("weapon", "armor", "helmet", "range_weapon", "boots", "left ring", "right ring", "amulet")
+    import copy
     rarity = ["poor","normal","magic","rare","legendary"]
 
     effects_list = lst_from_file (renpy.loader.transfn("resources/effects.txt") )
@@ -21,6 +23,7 @@ init -3 python: #before classes initiate, read some files and global variables
     units_list= lst_from_file (renpy.loader.transfn("resources/units.txt") )
     item_list = lst_from_file (renpy.loader.transfn('resources/items.txt') )
     army_list = lst_from_file (renpy.loader.transfn("resources/armies.txt"))
+    permanents_list=[]
 
     fonts_list= []
     for f in renpy.list_files():
@@ -70,8 +73,11 @@ init 1 python:
         global list_of_undead
         global Player_hero
         global menu_title #for chose screen
-        global event_description #for chose screen
+        global scout_report
+        global list_of_current_local_effects
+        scout_report=""
         list_of_undead=[]
+        list_of_current_local_effects = []
 
         for u in units_list:
             if u['type'] == "undead":
@@ -80,10 +86,10 @@ init 1 python:
         reward_generator=reward_gen()
         currency= Currency()
         players_army = Army("Glory Army")
-        Player_hero =  unit (search_in_list_by_name (units_list, "Necromancer") )
+        Player_hero =  Unit (search_in_list_by_name (units_list, "Necromancer") )
         players_army.add_unit( Player_hero)
-        players_army.add_unit( unit (search_in_list_by_name (units_list, "Sceleton") ) )
-        # players_army.add_unit( unit (search_in_list_by_name (units_list, "Lich") ) )
+        players_army.add_unit( Unit (search_in_list_by_name (units_list, "Sceleton") ) )
+        # players_army.add_unit( Unit (search_in_list_by_name (units_list, "Lich") ) )
 
         current_cell_name = ""
         event_started = False
@@ -94,6 +100,8 @@ init 1 python:
         events_to_cells()
         menu_title=[]
         event_description=""
+
+        test_scouting_inString ()
 
         # for c in map_cells_ls:
         #     st= "%s [" %c.name
@@ -153,9 +161,11 @@ label cell_menu:
     python:
         if event_started:
             event_started = False
+            enemy_army=None
             current_cell.finish_event()
         elif unfinished_started:
             unfinished_started = False
+            enemy_army=None
             current_cell.finish_unfinished()
     nvl clear
     jump main_map
@@ -186,6 +196,7 @@ label person:
 
 label castle:
     "It is your castle."
+    $test_scouting_inString ()
     jump main_map
 
 label journal:
@@ -216,20 +227,22 @@ label items:
     #    if len(current_cell.unfinished_events) != 0:
     jump journal
 
-$units_for_rec=[]
-$gained_exp = 0
+default units_for_rec=[]
+default gained_exp = 0
 label battle_field:
     scene scene_battle
     $result = False
-    $enemy_army = generate_army( search_in_list_by_name (army_list, current_cell.current_event.army ) )
+    if not enemy_army:
+        $enemy_army = generate_army( search_in_list_by_name (army_list, current_cell.current_event.army ) )
+
     if len (enemy_army.units) == 0:
         "вражеская армия трусливо сбежала"
     elif len (players_army.units) == 0:
         "у вас нет армии"
     else:
         $new_battle = Battle ( players_army, enemy_army)
-        $global units_for_rec
-        $global gained_exp
+        # $global units_for_rec
+        # $global gained_exp
         $units_for_rec = []
         hide screen say
         window hide
@@ -243,6 +256,7 @@ label battle_field:
         $gained_exp = enemy_army.reward_exp
         $currency.reputation += gained_exp/5
         $units_for_rec=enemy_army.stillAlive
+        $enemy_army=None
         if not result:
             jump game_over
         else:
@@ -267,16 +281,25 @@ label leveling:
     jump resurrection
     return
 
+init python:
+    def testResurrection():
+        global units_for_rec
+        units_for_rec.append( Unit (search_in_list_by_name (units_list, "Sceleton") ))
+        units_for_rec.append( Unit (search_in_list_by_name (units_list, "Sceleton") ))
+        renpy.jump ("resurrection")
+
 label resurrection:
-    hide screen battle_screen
-    show screen reccurection_screen
+    #hide screen battle_screen
+    # call screen reccurection_screen
+    scene scene_event
     nvl clear
     python:
         global units_for_rec
         global players_army
         global list_of_undead
         if len (units_for_rec) > 0:
-            while len(menu_items)>2:
+            while (True):
+                menu_title="Пополнение"
                 menu_items=[]
                 menu_items.append ( (("Некоторые враги все еще живы, хотя тяжело ранены\nВы можете преобразить их в своих войнов."), None ))
                 menu_items.append (( ("Не нужны мне лузеры в армии!"), 0))
@@ -306,13 +329,15 @@ label resurrection:
                         i+=1
                 ch =  renpy.display_menu( menu_it )
                 if (ch>0):
-                    un=unit(availible_units[ch-1])
+                    un=Unit(availible_units[ch-1])
                     players_army.add_unit( un )
                     players_army.regroup()
                     e("Вы создали [un.name]")
                 units_for_rec.remove(units_for_rec[choise-1])
-
+                if len(menu_items)<=2:
+                    break
     return
+
 label Menu_pressed:
     python:
         main_menu = False

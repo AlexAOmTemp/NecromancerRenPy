@@ -18,9 +18,11 @@ init python:
         def happens (self):
             global event_ended
             global menu_title
+            global scout_report
             event_ended = False
             # narrator ("Начало события \"%s\"."%(self.name))
             menu_title = "%s" % (self.name)
+            scout_report = sc_report()
             renpy.call ( self.jump_to_label)
 
         def is_valid (self):
@@ -72,7 +74,6 @@ init python:
                 event_cancelled= not event_ended
                 if (event_ended):
                     self.getRewardforCurrentEvent()
-                    event_description=""
                 if self.current_event.saveble:
                     if event_cancelled:
                         self.unfinished_events.append (self.current_event)
@@ -108,7 +109,6 @@ init python:
             def getRewardforCurrentEvent(self):
                 nvl_clear()
                 e ("событие пройдено")
-                event_description=""
                 it, gld = reward_generator.getReward(self.current_event.reward)
                 currency.items += it
                 currency.money += gld

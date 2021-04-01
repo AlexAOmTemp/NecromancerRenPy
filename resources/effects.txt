@@ -1,9 +1,7 @@
 [{
-"name": "decrease health", 
-"affect": "health", 
-"effect": "-"
-}, {
-"name": "increase health", 
-"affect": "health", 
-"effect": "+"
+    "name": "damage",
+    "image": "",
+    "effect": "decrease armored_health",
+    "time_mode": "at_start",
+    "effect_lasts": "permanent"
 }]

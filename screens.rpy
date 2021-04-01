@@ -409,7 +409,6 @@ style main_menu_version:
 screen game_menu(title, scroll=None, yinitial=0.0):
 
     style_prefix "game_menu"
-    $logging ("%s: %s"%(title, main_menu))
     if main_menu:
         add gui.main_menu_background
     else:

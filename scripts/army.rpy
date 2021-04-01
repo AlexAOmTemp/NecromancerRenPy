@@ -45,6 +45,9 @@ init python:
                 self.backline+=1;
             self.check_range()
 
+        def add_unit_by_name (self, name):
+            return self.add_unit ( Unit (search_in_list_by_name (units_list, name) ) )
+
         def regroup(self):
             for u in self.get_frontline_units():
                 if u.priority_line == "back":

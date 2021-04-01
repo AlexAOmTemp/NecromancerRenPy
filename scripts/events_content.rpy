@@ -2,6 +2,7 @@
 label castle_siege:
     menu:
         "Вы приближаетесь к вражескому замку. Его охраняют рыцари и их слуги"
+        "[scout_report]"
         "Штурм":
             call battle_field
             $event_ended = True
@@ -12,6 +13,7 @@ label castle_siege:
 label Mess_party:
     menu:
         "Вы встретили группу лохов"
+        "[scout_report]"
         "Опустить":
             call battle_field
             $event_ended = True
@@ -22,6 +24,7 @@ label Mess_party:
 label Peasants_party:
     menu:
         "Кучка крестьян с вилами, выглядит устрашающе"
+        "[scout_report]"
         "Навалять им":
             call battle_field
             $event_ended = True
@@ -32,6 +35,7 @@ label Peasants_party:
 label Peasant_and_co:
     menu:
         "Крестьянин с семьей, отличный зомбак выйдет"
+        "[scout_report]"
         "Гасить!":
             call battle_field
             $event_ended = True
@@ -42,6 +46,7 @@ label Peasant_and_co:
 label Brave_alone:
     menu:
         "Вы подглядываете из-за куста за каким то челом. Похоже это тренированный войн."
+        "[scout_report]"
         "Напасть из кустов":
             call battle_field
             $event_ended = True
@@ -51,6 +56,7 @@ label Brave_alone:
 label My_pike_only:
     menu:
         "Мужик несет кабанчика наколотого на пику. Одет в военную форму, наверно слабак!"
+        "[scout_report]"
         "Мужик, еда есть? А если найду?":
             call battle_field
             $event_ended = True
@@ -60,6 +66,7 @@ label My_pike_only:
 label Pikemans_party:
     menu:
         "Несколько парней сидят вокруг костра и жарят на пиках шашлык."
+        "[scout_report]"
         "Пахнет вкусно. Эй парни, огоньку не найдется?":
             call battle_field
             $event_ended = True
@@ -70,6 +77,7 @@ label Pikemans_party:
 label Knight_alone:
     menu:
         "Кажется это настоящий рыцарь. Можно сказать одинокий... ну не считая кортежа слуг конечно"
+        "[scout_report]"
         "Слыш паря, давай раз на раз! Только ты, я и моя армия!":
             call battle_field
             $event_ended = True
@@ -80,6 +88,7 @@ label Knight_alone:
 label One_poor_man:
     menu:
         "Захудалый одинокий противник, можно поразмяться"
+        "[scout_report]"
         "К бою, моя великая орда!":
             call battle_field
             $event_ended = True
@@ -88,10 +97,11 @@ label One_poor_man:
     return
 
 label Tumbstone:
+
     menu:
         "Вы нашли одинокую могилу, если ее раскопать можно попробовать создать скелета из давно иссохшегося трупа"
         "О да, я обожаю копать, в детстве мечтал стать шахтером!":
-            $players_army.add_unit( unit (search_in_list_by_name (units_list, "Sceleton") ) )
+            $players_army.add_unit( Unit (search_in_list_by_name (units_list, "Sceleton") ) )
             $players_army.regroup()
             "Вы создали скелета."
             if (dice_100() > 50):
@@ -105,6 +115,7 @@ label Tumbstone:
 label warriors:
     menu:
         "Вы видите 3 парней с мечами на сцене цирка"
+        "[scout_report]"
         "Эй парни, дай покажу как надо!":
             call battle_field
             $event_ended = True

@@ -20,7 +20,7 @@ init python:
         new_army = Army(parameters["name"])
         availible_units=[]
         for u in units_list:
-            if ( (u["type"] in parameters["units_with_teg"]
+            if ( (u["teg"] in parameters["units_with_teg"]
                 or u["name"] in parameters["units"])
                 and u["name"] not in parameters["exclude_units"]
                 and rarity.index(u["rarity"]) <= rarity.index(parameters["rarity"])):
@@ -45,13 +45,13 @@ init python:
             mult*=2
             if len(ls)>0:
                 for i in range (quant):
-                    new_army.add_unit( unit (random.choice(ls) ) )
+                    new_army.add_unit( Unit (random.choice(ls) ) )
                     if len(new_army.units)>=20:
                         return new_army
         return new_army
 
     def test_army_gen():
-        saveday=currency.day
+        saveday = currency.day
         saverep = currency.reputation
         while (currency.day<=currency.maxday):
             # logging ("\nday %d"% currency.day )
@@ -60,7 +60,7 @@ init python:
                 st="%s "%army.name
                 for u in army.units:
                     st+="%s : %s, " % (u.name, u.rarity)
-                logging (st)
+                # logging (st)
             currency.day+=10
             currency.reputation+=10
         currency.day = saveday

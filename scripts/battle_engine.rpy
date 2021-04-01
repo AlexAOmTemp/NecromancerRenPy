@@ -50,7 +50,7 @@ init python:
                 if u.maxRange>=self.cur_range:
                     sk=u.cast(self.cur_range)
                     if sk!=0:
-                        self.cast(u, enemy_army, sk)
+                        self.cast(u, self.enemy_army, sk)
             #logging ("\n")
             for u in self.enemy_army.units:
                 #logging ("enemy unit attacks:")
@@ -65,48 +65,56 @@ init python:
         #e(st)
 
         def cast(self, caster, enemy_army, skill):
-            #str = "%s is using a skill %s on: " % (caster.name, skill["name"] )
-            if skill["target"]== "enemy":
+            str = "%s is using a skill %s on: " % (caster.name, skill["name"] )
+
+            if skill["target"] == "enemy":
                 valid_targ = enemy_army.get_frontline_units()
                 quant = min (skill["targets quant"],len(valid_targ))
                 targets = random.sample (valid_targ, quant)
-                #for t in targets:
-                #    str += "%s " % (t.name)
-                value = skill["value"]
-                dep_s = skill["depends self"] #if skill damage bases on our unit stat
-                for d in dep_s:
-                    value+= vars (caster)[d] * dep_s[d]
-                #str += "with power %d" %  (value)
-                #logging(str)
-                dep_e= skill["depends enemy"] #if skill damage bases on enemy unit stat
-                add_dmg=[]
+
                 for t in targets:
+                    str += "%s " % (t.name)
+
+                value = skill["value"]
+                depends_self = skill["depends self"] #if skill damage bases on caster unit stat
+                for d in depends_self:
+                    value+= vars (caster.stats)[d] * depends_self[d]
+
+                str += "with power %d" %  (value)
+                logging(str)
+
+                depends_enemy = skill["depends enemy"] #if skill damage bases on enemy unit stat
+                add_dmg=[] #targets can have different stats
+                for targ in targets:
                     ad=0
-                    for d in dep_e:
-                        ad+=vars (t)[d] * dep_e[d]
+                    for d in depends_enemy:
+                        ad+=vars (targ.stats)[d] * depends_enemy[d]
                     add_dmg.append(ad)
 
+
                 ef=search_in_list_by_name(effects_list, skill["effect"])
-                aff= ef["affect"]
-                eff= ef["effect"]
+                logging (ef)
                 for t in targets:
                     i=0;
-                    if eff=="+":
-                        vars (t)[aff]+=value+add_dmg[i]
-                    elif eff=="-":
-                        if aff=="health":
-                           t.getDamage (value+add_dmg[i])
-                        else:
-                           vars (t)[aff]-=value+add_dmg[i]
-                    elif eff=="*":
-                        vars (t)[aff]*=value+add_dmg[i]
-                    elif eff=="/":
-                        vars (t)[aff]/=value+add_dmg[i]
+                    Local_Effect( ef, value+add_dmg[i], skill["effect duration"], t)
                     i+=1
-    logging ("battle")
 
-
-
+                # aff= ef["affect"]
+                # eff= ef["effect"]
+                # for t in targets:
+                #     i=0;
+                #     if eff=="+":
+                #         vars (t)[aff]+=value+add_dmg[i]
+                #     elif eff=="-":
+                #         if aff=="health":
+                #            t.getDamage (value+add_dmg[i])
+                #         else:
+                #            vars (t)[aff]-=value+add_dmg[i]
+                #     elif eff=="*":
+                #         vars (t)[aff]*=value+add_dmg[i]
+                #     elif eff=="/":
+                #         vars (t)[aff]/=value+add_dmg[i]
+                #     i+=1
 
 
 #
@@ -120,7 +128,7 @@ init python:
 #     $enemy_army.add_unit(unit (search(units_list, "Evil Peasant") ) )
 #     $enemy_army.add_unit(unit (search(units_list, "Peasant's son") ) )
 #
-#
+#К
 #     $battle (my_army, enemy_army)
 #     "end"
 #     scene bg room

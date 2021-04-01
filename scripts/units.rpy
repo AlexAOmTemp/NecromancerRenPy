@@ -1,17 +1,22 @@
 init python:
-    class unit:
+    class Unit:
         expForNextLvlMultiple = 1.4
         expForFirstLvlUp = 10
+        possible_parameters=set ( ("health max_health armor block dmg_melee dmg_range armored_health").split() )
         displayble = ['name','unit_type','rarity','armor','block','dmg_melee', 'dmg_range', 'maxRange']
         def __init__(self, unit_params):
+            self.tag = unit_params["tag"]
             self.unit_type = unit_params["type"]
             self.name = unit_params ["name"]
-            self.armor = unit_params ["armor"]
-            self.block = unit_params ["block"]
-            self.health = unit_params ["health"]
-            self.max_health = self.health
-            self.dmg_melee =  unit_params ["dmg_melee"]
-            self.dmg_range = unit_params ["dmg_range"]
+            self.equipment = Equipment(self,unit_params["slots"])
+            self.stats = Stats(unit_params["stats"])
+
+            # self.armor = unit_params ["armor"]
+            # self.block = unit_params ["block"]
+            # self.health = unit_params ["health"]
+            # self.max_health = self.health
+            # self.dmg_melee =  unit_params ["dmg_melee"]
+            # self.dmg_range = unit_params ["dmg_range"]
             self.resurrectable = unit_params ["resurrectable"]
             self.alive_chanse = 10 + 2* rarity.index(unit_params["rarity"])
             self.alive  = False
@@ -84,24 +89,22 @@ init python:
                 if self.health<=0:
                     self.dead = True
                     if self.resurrectable:
-                        if dice_100()<= self.alive_chanse:
+                        i=dice_100()
+                        if i<= self.alive_chanse:
                             self.alive = True
 
         def isAlive(self):
             return self.alive
 
-        def getDamage (self, dmg_value ):
-            str=""
-            if self.block>=dice_100():
-                dmg_value=0
-            dmg=dmg_value*(100/100+self.armor)
-            self.health-= dmg
-            self.health=int(round(self.health))
-            #str+=  "%s get %d damage. "% (self.name, dmg)
-            self.checkHealth()
-                #str+=  "He is dead. "
-            #str+= "Its current health %d"% (self.health)
-            #logging(str)
+        # def getDamage (self, dmg_value ):
+        #     str=""
+        #     if self.block>=dice_100():
+        #         dmg_value=0
+        #     dmg=dmg_value*(100/100+self.armor)
+        #     self.health-= dmg
+        #     self.health=int(round(self.health))
+        #     self.checkHealth()
+        #
 
         def isDead(self):
             return self.dead

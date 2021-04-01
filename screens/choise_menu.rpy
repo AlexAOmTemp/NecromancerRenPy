@@ -34,6 +34,8 @@ screen choice(items):
     style_prefix "choice"
 
     vbox:
+        yalign 0.5
+        xalign 0.5
         text menu_title:
             xalign 0.5
             size 50

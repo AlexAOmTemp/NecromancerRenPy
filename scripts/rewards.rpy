@@ -15,7 +15,7 @@ init python:
             for r in rarity:
                 self.items[r]=[]
                 for it in item_list:
-                    if it["level"]==r:
+                    if it["rarity"]==r:
                         self.items[r].append(it)
             self.gold={"poor":[1,10], "normal":[10,50], "magic":[50,100], "rare":[100,500], "legendary":[500,1000] }
 
