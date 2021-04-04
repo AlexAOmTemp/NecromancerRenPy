@@ -3,7 +3,7 @@ init python:
         expForNextLvlMultiple = 1.4
         expForFirstLvlUp = 10
         possible_parameters=set ( ("health max_health armor block dmg_melee dmg_range armored_health").split() )
-        displayble = ['name','unit_type','rarity','armor','block','dmg_melee', 'dmg_range', 'maxRange']
+        displayble = ['name','unit_type','rarity','maxRange']
         def __init__(self, unit_params):
             self.tag = unit_params["tag"]
             self.unit_type = unit_params["type"]
@@ -30,6 +30,8 @@ init python:
             self.experience = 0
             self.required_exp = int ( round (self.expForFirstLvlUp * (self.expForNextLvlMultiple**(self.level-1))))
             self.level_cap = 5
+            if "level_cap" in unit_params.keys():
+                self.level_cap = unit_params["level_cap"]
 
             for sc in unit_params ["skills"]:
                 self.skills.append(search_in_list_by_name(skill_list, sc))
@@ -44,6 +46,7 @@ init python:
             while self.experience >= required_exp :
                 self.experience -= required_exp
                 self.lvlUp()
+
         def changePriorityLine(self):
             if self.priority_line == "front":
                 self.priority_line = "back"
@@ -53,9 +56,10 @@ init python:
         def lvlUp ( self):
             if self.level < self.level_cap:
                 self.level += 1
-                self.max_health *= 1.1
-                self.dmg_melee *= 1.1
-                self.dmg_range *= 1.1
+                self.stats.max_health = int (round(self.stats.max_health*1.1+0.5))
+                self.stats.dmg_melee = int (round(self.stats.dmg_melee*1.1+0.5))
+                self.stats.dmg_range = int (round(self.stats.dmg_range*1.1+0.5))
+
                 e("%s получил %d уровень" %( self.name, self.level))
             else:
                 self.experience = 0
@@ -86,7 +90,7 @@ init python:
 
         def checkHealth(self):
             if self.dead == False:
-                if self.health<=0:
+                if self.stats.health <=0:
                     self.dead = True
                     if self.resurrectable:
                         i=dice_100()

@@ -86,6 +86,7 @@ init python:
             str=""
             rem_ls=[]
             for s in self.units:
+                s.checkHealth()
                 if s.isDead():
                     self.reward_exp += 2 + (2* rarity.index (s.rarity) ) # 2-9
                     if s.isAlive():

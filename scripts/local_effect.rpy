@@ -18,7 +18,7 @@ init python:
             self.name = parameters["name"]
 
             self.effect = "%s %d"%(parameters["effect"], value)
-            logging(self.effect)
+            # logging(self.effect)
 
             self.duration = duration
             self.target = target

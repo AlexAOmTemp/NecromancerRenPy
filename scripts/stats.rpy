@@ -2,15 +2,18 @@ init -1 python:
     class Stats:
         possible_parameters=set ( ("health max_health armored_health armor block dmg_melee dmg_range ").split() )
         opposite_effects = {"increase":"decrease","decrease":"increase","divide":"multiply","multiply":"divide"}
-
+        displayble = ['block','dmg_melee', 'dmg_range']
         def __init__ (self, parameters):
             self.armored_health = 0
             self.armor = parameters ["armor"]
             self.block = parameters ["block"]
             self.health = parameters ["health"]
-            self.max_health = self.health
-            self.dmg_melee =  parameters ["dmg_melee"]
-            self.dmg_range = parameters ["dmg_range"]
+            self.max_health = self.base_max_health = self.health
+            self.dmg_melee = self.base_dmg_melee = parameters ["dmg_melee"]
+            self.dmg_range = self.base_dmg_range = parameters ["dmg_range"]
+
+            # (base 10 + sword 20) * spell (1.2)
+            # (base 12 + sword 20) * spell (1.2)
 
         def setEffect(self, eff):
             self.effects.append (eff)
@@ -29,7 +32,7 @@ init -1 python:
 
         def resetParameterFromStr (self, string= "decrease health 10"):
             ls= string.split()
-            ls[0] = reverse_eff(ls[0])
+            ls[0] = self.reverse_eff(ls[0])
             val = int (ls[2])
             self.changeParameter ( ls[0], ls[1], val)
 
@@ -38,6 +41,8 @@ init -1 python:
                 return (self.opposite_effects [effect])
 
         def changeParameter (self, effect, affect, value):
+            if affect=="max_health":
+                self.changeParameter ( effect, "health", value)
             if affect=="armored_health":
                 self.armored_health = self.health  * (1 + 0.01 * self.armor)
             if affect in self.possible_parameters: ##and effect in local_effect.possible_effect:
@@ -55,6 +60,7 @@ init -1 python:
                 raise ValueError
             if affect=="armored_health":
                 self.health = round ( self.armored_health / (1 + 0.01 * self.armor) )
+
 
         def __repr__(self):
             members = [attr for attr in dir(self) if not callable(getattr(self, attr)) and not attr.startswith("__")]

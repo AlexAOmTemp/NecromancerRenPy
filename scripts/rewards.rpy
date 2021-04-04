@@ -17,7 +17,7 @@ init python:
                 for it in item_list:
                     if it["rarity"]==r:
                         self.items[r].append(it)
-            self.gold={"poor":[1,10], "normal":[10,50], "magic":[50,100], "rare":[100,500], "legendary":[500,1000] }
+            self.gold={"poor":[1,10], "normal":[10,20], "magic":[20,30], "rare":[30,50], "legendary":[50,100] }
 
         def getReward (self,parameters):
             global items_by_names
@@ -50,5 +50,8 @@ init python:
 
     logging ("rewards")
 
+    def test_rewards():
+        it, gld = reward_generator.getReward(self.current_event.reward)
+        currency.addItem()
     #it, gld = reward_generator.getReward(rwd)
     #e (it, gld)

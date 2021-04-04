@@ -1,7 +1,7 @@
 init python:
 
     class Equipment:
-        possibleSlots = ("melee weapon", "armor", "helmet", "range weapon", "boots", "left ring", "right ring", "amulet")
+        possibleSlots = ("melee weapon", "armor", "helmet", "shield", "range weapon", "boots", "left ring", "right ring", "amulet")
         def __init__(self, owner, slots):
             self.slots={}
             for s in slots:
@@ -16,6 +16,9 @@ init python:
                 self.slots[item.slot]=item
                 for i in item.stats:
                     self.owner.stats.setParameterFromStr(i)
+                currency.items.remove(item) 
+            else:
+                raise NameError('Item with wrong slot: %s'%item.slot )
 
         def unequip (self, item):
             if self.slots[item.slot] == item:
@@ -23,3 +26,6 @@ init python:
                 item.unequip()
                 for i in item.stats:
                     self.owner.stats.resetParameterFromStr(i)
+                currency.items.append(item)
+            else:
+                raise NameError('Item not in slot')

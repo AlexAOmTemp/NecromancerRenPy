@@ -128,7 +128,7 @@
         "saveble": false,
 	    "level": "legendary",
 	    "reward":{
-    		"legendary":3
+    		"legendary":1
     	},
         "army":"legendary_human_army_1"
     },

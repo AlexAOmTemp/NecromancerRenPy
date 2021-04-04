@@ -78,7 +78,7 @@ screen general():
         spacing scaled(20)
         frame:
             xpos scaled(8)
-            
+
             xsize scaled(240)
             background "status"
             vbox:
@@ -96,8 +96,8 @@ screen general():
                     text "[rep]"
                 hbox:
                     text "Health: "
-                    $cur_hp= max (int (round (Player_hero.health) ), 0)
-                    $max_hp = int (round (Player_hero.max_health))
+                    $cur_hp= max (int (round (Player_hero.stats.health) ), 0)
+                    $max_hp = int (round (Player_hero.stats.max_health))
                     text "[cur_hp] / [max_hp]"
         frame:
             background None

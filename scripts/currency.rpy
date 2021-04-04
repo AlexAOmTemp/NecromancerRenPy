@@ -14,4 +14,10 @@ init python:
             st='\n'.join([str(elem) for elem in self.items])
             return (st)
 
+        def addItem (self, itemName):
+            self.items.append( Item ( search_in_list_by_name ( item_list, itemName ) ))
+
+        def sellAllItems (self):
+            for i in reversed(self.items):
+                i.sell()
     logging ("currency")

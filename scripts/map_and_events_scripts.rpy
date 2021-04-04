@@ -110,7 +110,9 @@ init python:
                 nvl_clear()
                 e ("событие пройдено")
                 it, gld = reward_generator.getReward(self.current_event.reward)
-                currency.items += it
+                for i in it:
+                    logging (i)
+                    currency.addItem (i)
                 currency.money += gld
                 st=""
                 if len (it)>0 or gld>0:
@@ -168,7 +170,7 @@ init python:
                         c.repetable_events_names.append(ev["name"])
 
 
-    def how_many():
+    def how_many_cells_on_map():
         st= "На карте:\n"
         fields=[]
         count=[]

@@ -21,8 +21,11 @@ init -3 python: #before classes initiate, read some files and global variables
     effects_list = lst_from_file (renpy.loader.transfn("resources/effects.txt") )
     skill_list = lst_from_file (renpy.loader.transfn("resources/skills.txt") )
     units_list= lst_from_file (renpy.loader.transfn("resources/units.txt") )
-    item_list = lst_from_file (renpy.loader.transfn('resources/items.txt') )
+    item_list= (lst_from_file (renpy.loader.transfn('resources/items.txt') ) )
     army_list = lst_from_file (renpy.loader.transfn("resources/armies.txt"))
+    generate_items_list = lst_from_file (renpy.loader.transfn("resources/item_generator.txt"))
+
+
     permanents_list=[]
 
     fonts_list= []
@@ -59,7 +62,7 @@ init -3 python: #before classes initiate, read some files and global variables
 
 init 1 python:
 
-    logging ("globals 2")
+    generate_standart_items_templates()
     #set of items names
     def initVariables():
         global reward_generator
@@ -75,15 +78,21 @@ init 1 python:
         global menu_title #for chose screen
         global scout_report
         global list_of_current_local_effects
+        global enemy_army
+        global items_by_names
+
+        enemy_army = None
         scout_report=""
         list_of_undead=[]
         list_of_current_local_effects = []
 
         for u in units_list:
-            if u['type'] == "undead":
+            if u['tag'] == "undead":
                 list_of_undead.append(u)
 
-        reward_generator=reward_gen()
+        items_by_names = init_items_by_names_list(item_list)
+        reward_generator=reward_gen()#after forming item_list
+
         currency= Currency()
         players_army = Army("Glory Army")
         Player_hero =  Unit (search_in_list_by_name (units_list, "Necromancer") )
@@ -101,7 +110,11 @@ init 1 python:
         menu_title=[]
         event_description=""
 
-        test_scouting_inString ()
+        # test_item()
+        testStat()
+
+        # logging ("after all %s"%item_list)
+        # test_scouting_inString ()
 
         # for c in map_cells_ls:
         #     st= "%s [" %c.name
@@ -111,8 +124,14 @@ init 1 python:
         #     logging (st)
         #
         # test_army_gen()
+init 2 python:
+    def checkItemList():
+        global item_list
+        if item_list:
+            logging ("%d 2 true"%currency.day)
 
 init python:
+
     def onCellClicked (cell_name):
         global current_cell_name
         if currency.activity>0:
@@ -120,15 +139,6 @@ init python:
             renpy.jump("cell_menu")
         else:
             renpy.jump("sleep")
-    # logging ("on button click")
-
-    # def save():
-    #     logging ("save day %d"%currency.day)
-    #     renpy.rename_save("1-2", "1-3")
-    #     renpy.rename_save("1-1", "1-2")
-    #     renpy.take_screenshot()
-    #     renpy.save("1-1","Autosave day %d"%currency.day)
-    #     return
 
 label cell_menu:
     nvl clear
@@ -139,7 +149,6 @@ label cell_menu:
         current_cell = search ( map_cells_ls, current_cell_name)
         menu_title = ("Клетка %s, %s" % (current_cell.name[4:],current_cell.type) )
         menu_items=[]
-        # menu_items.append ( (("Вы находитесь на клетке %s" % current_cell), None ))
         menu_items.append (("Искать приключений", 0))
         menu_items.append( ("Уйти", 1))
         if len(current_cell.unfinished_events) != 0:
@@ -182,35 +191,38 @@ label army:
 
 label person:
     nvl clear
-    python:
+
         # menu:
         #     "Управление персонажем:"
         #     "Вещи": jump items
 
-        st=currency.get_player_items_names()
-        if len(st) == 0:
-            e("У Вас пока нет вещей")
-        else:
-            e("Список вещей:\n%s"% st)
+    call screen inventory_main_screen()
+
+        # st=currency.get_player_items_names()
+        # if len(st) == 0:
+        #     e("У Вас пока нет вещей")
+        # else:
+        #     e("Список вещей:\n%s"% st)
     jump main_map
 
 label castle:
     "It is your castle."
-    $test_scouting_inString ()
+    # $test_scouting_inString ()
     jump main_map
 
 label journal:
     nvl clear
-    $e(how_many())
+    $e(how_many_cells_on_map())
     jump main_map
 
 
 init python:
     def next_day ():
+        checkItemList()
         currency.activity=3
         currency.day+=1
         for u in players_army.units:
-            u.health= u.max_health
+            u.stats.health= u.stats.max_health
 
         renpy.retain_after_load()
         renpy.rename_save("1-2", "1-3")
@@ -277,6 +289,8 @@ label leveling:
             else:
                 ex=exp
             print (ex)
+            if u==Player_hero:
+                ex*=2
             u.addExp (ex)
     jump resurrection
     return

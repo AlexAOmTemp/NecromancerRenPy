@@ -15,12 +15,13 @@ init python:
     # "amount": 3
     # }]
 
-    def generate_army ( parameters):
+    def generate_army ( const_params):
+        parameters = copy.deepcopy(const_params)
         units = []
         new_army = Army(parameters["name"])
         availible_units=[]
         for u in units_list:
-            if ( (u["teg"] in parameters["units_with_teg"]
+            if ( (u["tag"] in parameters["units_with_teg"]
                 or u["name"] in parameters["units"])
                 and u["name"] not in parameters["exclude_units"]
                 and rarity.index(u["rarity"]) <= rarity.index(parameters["rarity"])):

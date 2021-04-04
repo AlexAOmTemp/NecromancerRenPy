@@ -27,7 +27,6 @@ screen army_main_screen():
         $ls = [[],[]]
         $ls[0] = players_army.get_backline_units()
         $ls[1] = players_army.get_frontline_units()
-        $logging ("%s"%ls[0])
         for k in range (2):
             vbox:
                 spacing scaled (10)
@@ -92,11 +91,16 @@ screen unit_stats(unit):
         frame:
             vbox:
                 xsize 300
+
                 for st in unit.displayble:
-                    text "%s: %s"%(st, getattr(current_unit, st)) xalign 0.0
-                $cur_hp= max (int (round (unit.health) ), 0)
-                $max_hp = int (round (unit.max_health))
+                    text "%s: %s"%(st, getattr(unit, st)) xalign 0.0
+                $cur_hp= max (int (round (unit.stats.health) ), 0)
+                $max_hp = int (round (unit.stats.max_health))
+                $arm_perc = round( (1-1/(1 + 0.01 * unit.stats.armor))*100 , 1 ) 
                 text "health: [cur_hp] / [max_hp]"
+                text "armor: [unit.stats.armor] ([arm_perc]%)"
+                for st in unit.stats.displayble:
+                    text "%s: %s"%(st, getattr(unit.stats, st)) xalign 0.0
                 text "Priority line: [unit.priority_line]"
                 text "Level: [unit.level] / [unit.level_cap]"
                 text "Experience: [unit.experience] / [unit.required_exp]"
