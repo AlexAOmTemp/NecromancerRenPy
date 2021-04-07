@@ -1,16 +1,16 @@
 [{
     "name": "sword",
     "slot": "melee weapon",
-    "main stats": "increase dmg_melee",
+    "main stats": "Increment melee damage",
     "main values": [3,4],
-    "stats":  ["increase max_health", "increase armor", "increase block"],
+    "stats":  ["Increment maximum health", "Increment armor", "Increment block"],
     "values": [ [1,3], [0.9,1.4], [1,3] ],
     "main skills": ["melee attack"],
     "skills": []
 },{
     "name": "bow",
     "slot": "range weapon",
-    "main stats": "increase dmg_range",
+    "main stats": "Increment range damage",
     "main values": [2,3.5],
     "stats":  [],
     "values": [],
@@ -19,45 +19,45 @@
 },{
     "name": "shield",
     "slot": "shield",
-    "main stats": "increase block",
+    "main stats": "Increment block",
     "main values": [4,6],
-    "stats":  ["increase max_health", "increase armor"],
+    "stats":  ["Increment maximum health", "Increment armor"],
     "values": [[1,3],[1,4]],
     "main skills": [],
     "skills": []
 },{
     "name": "axe",
     "slot": "melee weapon",
-    "main stats": "increase dmg_melee",
+    "main stats": "Increment melee damage",
     "main values": [3,4.5],
-    "stats":  ["increase max_health"],
+    "stats":  ["Increment maximum health"],
     "values": [ [1,3] ],
     "main skills": ["melee attack"],
     "skills": []
 },{
     "name": "platemail",
     "slot": "armor",
-    "main stats": "increase armor",
+    "main stats": "Increment armor",
     "main values": [2,4],
-    "stats":  ["increase max_health"],
+    "stats":  ["Increment maximum health"],
     "values": [ [4,8] ],
     "main skills": [],
     "skills": []
 },{
     "name": "helmet",
     "slot": "helmet",
-    "main stats": "increase armor",
+    "main stats": "Increment armor",
     "main values": [1.6,3],
-    "stats":  ["increase max_health"],
+    "stats":  ["Increment maximum health"],
     "values": [ [1,4] ],
     "main skills": [],
     "skills": []
 },{
     "name": "boots",
     "slot": "boots",
-    "main stats": "increase armor",
+    "main stats": "Increment armor",
     "main values": [1.6,3],
-    "stats":  ["increase max_health"],
+    "stats":  ["Increment maximum health"],
     "values": [ [1,4] ],
     "main skills": [],
     "skills": []

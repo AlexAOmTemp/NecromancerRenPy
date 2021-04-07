@@ -94,13 +94,19 @@ screen unit_stats(unit):
 
                 for st in unit.displayble:
                     text "%s: %s"%(st, getattr(unit, st)) xalign 0.0
-                $cur_hp= max (int (round (unit.stats.health) ), 0)
-                $max_hp = int (round (unit.stats.max_health))
-                $arm_perc = round( (1-1/(1 + 0.01 * unit.stats.armor))*100 , 1 ) 
-                text "health: [cur_hp] / [max_hp]"
-                text "armor: [unit.stats.armor] ([arm_perc]%)"
-                for st in unit.stats.displayble:
-                    text "%s: %s"%(st, getattr(unit.stats, st)) xalign 0.0
+                $cur_hp= max (int (round (unit.stats.current_health.val() ) ), 0)
+                $max_hp = int (round (unit.stats.max_health.val() ))
+                $armr = unit.stats.armor.val()
+                $blk = unit.stats.block.val()
+                $dmg_ml = unit.stats.dmg_melee.val()
+                $dmg_rng = unit.stats.dmg_range.val()
+                $arm_perc = round( (1-1/(1 + 0.01 * armr ))*100 , 1 )
+                text "Health: [cur_hp] / [max_hp]"
+                text "Armor: [armr] ([arm_perc]%)"
+                text "Block: [blk]"
+                text "Melee damage: [dmg_ml]"
+                text "Range damage: [dmg_rng]"
+
                 text "Priority line: [unit.priority_line]"
                 text "Level: [unit.level] / [unit.level_cap]"
                 text "Experience: [unit.experience] / [unit.required_exp]"

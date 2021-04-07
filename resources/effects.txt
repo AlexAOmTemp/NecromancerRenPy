@@ -1,7 +1,7 @@
 [{
     "name": "damage",
     "image": "",
-    "effect": "decrease armored_health",
+    "effect": "deal damage",
     "time_mode": "at_start",
     "effect_lasts": "permanent"
 }]

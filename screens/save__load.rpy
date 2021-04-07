@@ -128,7 +128,7 @@
 #
 #             for i in range(1, columns * rows + 1):
 #                 button:
-#                     action FileAction(i),logging( "%s" %renpy.current_screen())
+#                     action FileAction(i),# logging( "%s" %renpy.current_screen())
 #
 #                     has hbox
 #                     $ file_name = FileSlotName(i, columns * rows)

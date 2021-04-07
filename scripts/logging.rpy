@@ -11,4 +11,4 @@ init -6 python:
             fh.close()
 
     clear_log()
-    logging ("log")
+    # logging ("log")

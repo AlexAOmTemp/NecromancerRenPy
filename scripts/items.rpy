@@ -3,10 +3,10 @@ init python:
     def init_items_by_names_list( lst):
         return (set ([x['name'] for x in lst]) )
 
-    logging ("items")
+    # logging ("items")
 
     # for id, val in enumerate(items_by_names):
-    #     logging ("%d %s"%(id, val))
+    #     # logging ("%d %s"%(id, val))
 
 # "slot": "melee weapon",
 # "name": "редкий меч",
@@ -57,13 +57,15 @@ init python:
         def roll_stats(self):
             for i in range (len(self.stats)):
                 ls= self.stats[i].split()
-                if len (ls) == 3:
-                    val = json.loads(ls[2])
-                    if not isinstance(val, int):
+                for word in ls:
+                    if "[" in word:
+                        ind = ls.index(word)
+                        val = json.loads(word)
                         val = random.randint(val[0],val[1])
-                    self.stats[i] = ("%s %s %d"% (ls[0],ls[1],val) )
-                else:
-                    raise ValueError('item %s has wrong stat: %s'%(self.name, self.stats[i]) )
+                        ls[ind] = ("%d"% (val) )
+                        self.stats[i]= " ".join(ls)
+                # else:
+                #     raise ValueError('item %s has wrong stat: %s'%(self.name, self.stats[i]) )
 
         def equip (self, target):
             self.isEquipped = True

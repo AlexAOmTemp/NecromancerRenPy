@@ -48,7 +48,7 @@ init python:
             gold = random.randint(rand[0],rand[1])
             return items , gold
 
-    logging ("rewards")
+    # logging ("rewards")
 
     def test_rewards():
         it, gld = reward_generator.getReward(self.current_event.reward)

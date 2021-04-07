@@ -8,58 +8,60 @@ init -2 python:
             self._ad = 0
             self._tot = 0
             self.name = name
-            self.total()
+            self._total()
 
         def __str__(self):
             return ("total:%s, base: %s, increment:%s, increase: %s, add: %s, multiply: %s"
                     %(self._tot,self._bs,self._increm, self._increa, self._ad, self._mult))
 
-        def total(self):
+        def _total(self):
             self._tot = (( self._bs + self._increm ) * self._increa + self._ad ) * self._mult
 
+        def base(self):
+            return int(round(self._bs))
 
         def val (self):
             return int(round(self._tot))
 
         def grow (self, value):
             self._bs += value
-            self.total()
+            self._total()
 
         def shrink (self, value):
             self._bs -= value
-            self.total()
+            self._total()
 
         def increment(self, value):
             self._increm += value
-            self.total()
+            self._total()
 
         def decrement(self, value):
             self._increm -= value
-            self.total()
+            self._total()
 
         def increase(self, value):
             self._increa += float(value)/100
-            self.total()
+            self._total()
 
         def decrease(self, value):
             self._increa -= float(value)/100
-            self.total()
+            self._total()
 
         def multiply(self, value):
             self._mult += float (value)/100
-            self.total()
+            self._total()
 
         def divide (self, value):
             self._mult -= float(value)/100
-            self.total()
+            self._total()
 
         def add(self, value):
             self._ad += value
-            self.total()
+            self._total()
 
         def sub(self, value):
             self._ad -= value
-            self.total()
+            self._total()
 
     def testStat():
         total = 100
@@ -109,13 +111,11 @@ init -2 python:
 
         hp.decrease (100)
         total = 460
-        logging (hp)
         if total != hp.val():
             raise ValueError ("testStat failed at stage 10")
 
         hp.divide(150)
         total = 115
-        logging (hp)
         if total != hp.val():
             raise ValueError ("testStat failed at stage 11")
 

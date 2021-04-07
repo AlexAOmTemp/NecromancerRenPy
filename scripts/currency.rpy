@@ -20,4 +20,4 @@ init python:
         def sellAllItems (self):
             for i in reversed(self.items):
                 i.sell()
-    logging ("currency")
+    # logging ("currency")

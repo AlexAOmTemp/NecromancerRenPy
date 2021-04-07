@@ -1,9 +1,0 @@
-log
-currency
-items
-map and events
-rewards
-units
-total:460.0, base: 100, increment:10, increase: 2.0, add: 10, multiply: 2.0
-total:115.0, base: 100, increment:10, increase: 2.0, add: 10, multiply: 0.5
-start

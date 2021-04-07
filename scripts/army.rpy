@@ -54,7 +54,7 @@ init python:
                     u.line= "back"
                     self.frontline-=1
                     self.backline+=1
-            print (self.get_backline_units())
+            # print (self.get_backline_units())
 
             for u in self.get_backline_units():
                 if self.frontline < self.army_cap/2:
@@ -96,7 +96,7 @@ init python:
                     rem_ls.append (s)
             for s in rem_ls:
                 self.remove_unit(s)
-            # logging ("умерло юнитов: %d %s"% (cnt,str) )
+            # # logging ("умерло юнитов: %d %s"% (cnt,str) )
             self.check_range()
 
         def __str__(self):

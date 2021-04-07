@@ -18,7 +18,7 @@ init python:
 
         def next_round (self):
             global Player_hero
-            # logging ("round %d"% self.round)
+            # # logging ("round %d"% self.round)
             if self.isOver == True:
                 return
             self.round+=1
@@ -26,15 +26,15 @@ init python:
             self.player_army.regroup()
             self.enemy_army.bring_out_your_dead()
             self.enemy_army.regroup()
-            # logging ("our army frontline %d, our army backline %d" % (self.player_army.frontline, self.player_army.backline) )
-            # logging ("enemy army frontline %d, enemy army backline %d" % (self.enemy_army.frontline, self.enemy_army.backline) )
+            # # logging ("our army frontline %d, our army backline %d" % (self.player_army.frontline, self.player_army.backline) )
+            # # logging ("enemy army frontline %d, enemy army backline %d" % (self.enemy_army.frontline, self.enemy_army.backline) )
             if len(self.player_army.units)<=0 or Player_hero.isDead():
-                # logging ("we have lost the battle\n")
+                # # logging ("we have lost the battle\n")
                 self.over = True
                 self.win = False
                 return
             if len(self.enemy_army.units)<=0:
-                # logging ("we have won the battle\n")
+                # # logging ("we have won the battle\n")
                 self.over = True
                 self.win = True
                 return
@@ -44,21 +44,21 @@ init python:
             # str="our army %d units\n" % (ln)
             # str+="enemy army %d units\n" % (len(self.enemy_army.units))
             # str+="current range %d" % (self.cur_range)
-            # logging(str)
+            # # logging(str)
 
             for u in self.player_army.units:
 
-                # logging ("our unit attacks:")
+                # # logging ("our unit attacks:")
 
                 if u.maxRange>=self.cur_range:
                     sk=u.cast(self.cur_range)
                     if sk!=0:
                         self.cast(u, self.enemy_army, sk)
 
-            # logging ("\n")
+            # # logging ("\n")
             for u in self.enemy_army.units:
 
-                # logging ("enemy unit attacks:")
+                # # logging ("enemy unit attacks:")
                 if u.maxRange >= self.cur_range:
                     sk=u.cast(self.cur_range)
                     if sk!=0:
@@ -82,24 +82,26 @@ init python:
                 value = skill["value"]
                 depends_self = skill["depends self"] #if skill damage bases on caster unit stat
                 for d in depends_self:
-                    value+= vars (caster.stats)[d] * depends_self[d]
+                    # # logging (d)
+                    value+= vars (caster.stats)[d].val() * depends_self[d]
 
                 str += "with power %d" %  (value)
 
-                # logging(str)
+                # # logging(str)
 
                 depends_enemy = skill["depends enemy"] #if skill damage bases on enemy unit stat
                 add_dmg=[] #targets can have different stats
                 for targ in targets:
                     ad=0
                     for d in depends_enemy:
-                        ad+=vars (targ.stats)[d] * depends_enemy[d]
+                        # # logging (d)
+                        ad+=vars (targ.stats)[d].val() * depends_enemy[d]
                     add_dmg.append(ad)
 
 
                 ef=search_in_list_by_name(effects_list, skill["effect"])
 
-                # logging (ef)
+                # # logging (ef)
 
                 for t in targets:
                     i=0;

@@ -96,8 +96,8 @@ screen general():
                     text "[rep]"
                 hbox:
                     text "Health: "
-                    $cur_hp= max (int (round (Player_hero.stats.health) ), 0)
-                    $max_hp = int (round (Player_hero.stats.max_health))
+                    $cur_hp= max (int (round (Player_hero.stats.current_health.val() ) ), 0)
+                    $max_hp = int (round (Player_hero.stats.max_health.val() ))
                     text "[cur_hp] / [max_hp]"
         frame:
             background None

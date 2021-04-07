@@ -49,8 +49,8 @@ screen unit_screen (unit):
         vbox:
             text unit.name color "#000000"
 
-            $cur_hp= max (int (round (unit.stats.health) ), 0)
-            $max_hp = int (round (unit.stats.max_health))
+            $cur_hp= max (int (round (unit.stats.current_health.val()) ), 0)
+            $max_hp = int (round (unit.stats.max_health.val() ))
             bar:
                 xysize(100, 10)
                 range max_hp

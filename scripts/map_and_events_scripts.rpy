@@ -56,7 +56,7 @@ init python:
                 else:
                     posibble_events=self.repetable_events_names
                     #e ("Регулярное событие")
-                print (posibble_events)
+                # print (posibble_events)
                 if posibble_events==[]:
                     e ("Нет событий")
                     global event_started
@@ -66,7 +66,7 @@ init python:
                 if isinstance (posibble_events[dice],str):
                     posibble_events[dice]= event (search_in_list_by_name (events_list, posibble_events[dice]))
                 self.current_event=posibble_events[dice]
-                #logging("start_event\n"+repr(self)+"\n\n")
+                ## logging("start_event\n"+repr(self)+"\n\n")
                 self.current_event.happens()
 
             def finish_event (self):
@@ -79,16 +79,16 @@ init python:
                         self.unfinished_events.append (self.current_event)
                         e("событие сохранено")
                     self.saveble_events.remove(self.current_event)
-                #logging("finish_event\n"+repr(self)+"\n\n")
+                ## logging("finish_event\n"+repr(self)+"\n\n")
 
             def start_unfinished (self, position):
-                # logging("%s" % type(position))
+                # # logging("%s" % type(position))
                 self.current_event=self.unfinished_events[int(position)]
                 st=[]
                 for i in range(len(self.unfinished_events)):
                     st+=self.unfinished_events[i].name
-                #logging("start_unfinished\nunfinished=%s"%(self.unfinished_events))
-                #logging("position=%d\nunfinished_events=%s\ncurrent_event=%s\n\n" % (position,st,self.current_event) )
+                ## logging("start_unfinished\nunfinished=%s"%(self.unfinished_events))
+                ## logging("position=%d\nunfinished_events=%s\ncurrent_event=%s\n\n" % (position,st,self.current_event) )
                 self.current_event.happens()
 
             def finish_unfinished (self):
@@ -104,23 +104,22 @@ init python:
                             for ev in self.unfinished_events:
                                 e("%s" % (ev) )
                         e("%s" % (self.current_event) )
-                #logging("finish_unfinished\n"+repr(self)+"\n\n")
+                ## logging("finish_unfinished\n"+repr(self)+"\n\n")
 
             def getRewardforCurrentEvent(self):
                 nvl_clear()
-                e ("событие пройдено")
+                st="событие завершено\n"
                 it, gld = reward_generator.getReward(self.current_event.reward)
                 for i in it:
-                    logging (i)
                     currency.addItem (i)
                 currency.money += gld
-                st=""
+
                 if len (it)>0 or gld>0:
                     st+=("получена награда!")
                     if gld>0:
                         st+=("\nзолото: %d\n" % gld)
                     if len(it)>0:
-                        toStr = ''.join([(str(elem)+'\n') for elem in it])
+                        toStr = ''.join(["{color=#00ff00}"+(str(elem)+'{/color}\n') for elem in it])
                         st+=toStr
                     e (st)
 
@@ -158,7 +157,7 @@ init python:
                     i=0
                     j=0
                     random.shuffle(cells)
-                    # logging ( "%s %s" % (ev["name"],types) )
+                    # # logging ( "%s %s" % (ev["name"],types) )
                     while (i<ev["max_times_happens"]):
                         cells[j].saveble_events.append(event(ev))
                         i+=1
@@ -222,4 +221,4 @@ init python:
                 else:
                     print ("Неверный ввод")
 
-    logging ("map and events")
+    # logging ("map and events")

@@ -18,7 +18,7 @@ init python:
             self.name = parameters["name"]
 
             self.effect = "%s %d"%(parameters["effect"], value)
-            # logging(self.effect)
+            # # logging(self.effect)
 
             self.duration = duration
             self.target = target
@@ -77,7 +77,7 @@ init python:
                 self.target.stats.removeEffect(self)
             if self in list_of_current_local_effects:
                 list_of_current_local_effects.remove(self)
-            print ("removed")
+            # print ("removed")
 
 
         def __str__(self):

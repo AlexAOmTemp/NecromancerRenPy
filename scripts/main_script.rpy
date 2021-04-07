@@ -111,9 +111,9 @@ init 1 python:
         event_description=""
 
         # test_item()
-        testStat()
-
-        # logging ("after all %s"%item_list)
+        # testStat()
+        # testStatsParser()
+        # # logging ("after all %s"%item_list)
         # test_scouting_inString ()
 
         # for c in map_cells_ls:
@@ -121,14 +121,10 @@ init 1 python:
         #     for ev in c.saveble_events:
         #         st+=(ev.name+' ')
         #     st+= "]"
-        #     logging (st)
+        #     # logging (st)
         #
         # test_army_gen()
-init 2 python:
-    def checkItemList():
-        global item_list
-        if item_list:
-            logging ("%d 2 true"%currency.day)
+
 
 init python:
 
@@ -218,11 +214,10 @@ label journal:
 
 init python:
     def next_day ():
-        checkItemList()
         currency.activity=3
         currency.day+=1
         for u in players_army.units:
-            u.stats.health= u.stats.max_health
+            u.stats.current_health.restore()
 
         renpy.retain_after_load()
         renpy.rename_save("1-2", "1-3")
@@ -266,7 +261,8 @@ label battle_field:
         scene scene_event
         $result = new_battle.isPlayerWon()
         $gained_exp = enemy_army.reward_exp
-        $currency.reputation += gained_exp/5
+        if currency.reputation<1000:
+            $currency.reputation = min ( currency.reputation+gained_exp/5, 1000)
         $units_for_rec=enemy_army.stillAlive
         $enemy_army=None
         if not result:
@@ -281,17 +277,22 @@ label leveling:
         global players_army
         exp = gained_exp // len (players_army.units)
         exp_rest = gained_exp % len (players_army.units)
-        print (exp, exp_rest)
+        # print (exp, exp_rest)
+        st=""
         for u in players_army.units:
             if exp_rest>0:
                 exp_rest-=1
                 ex=exp+1
             else:
                 ex=exp
-            print (ex)
+            # print (ex)
             if u==Player_hero:
                 ex*=2
-            u.addExp (ex)
+            s=u.addExp (ex)
+            if s:
+                st+=s
+        if st:
+            e(st)
     jump resurrection
     return
 
@@ -312,44 +313,50 @@ label resurrection:
         global players_army
         global list_of_undead
         if len (units_for_rec) > 0:
-            while (True):
-                menu_title="Пополнение"
-                menu_items=[]
-                menu_items.append ( (("Некоторые враги все еще живы, хотя тяжело ранены\nВы можете преобразить их в своих войнов."), None ))
-                menu_items.append (( ("Не нужны мне лузеры в армии!"), 0))
-                i=1
-                if len(units_for_rec)>0:
-                    for u in units_for_rec:
-                        menu_items.append ( ( ("%s" %  u.name ) , i ))
-                        i+=1
-                else:
-                    break
+            if len(players_army.units) >= 20:
+                e("Некоторые враги все еще живы, но в вашей армии больше нет места. Вы милосердно добиваете уцелевших")
+            else:
+                while (True):
+                    menu_title="Пополнение"
+                    menu_items=[]
+                    menu_items.append ( (("Некоторые враги все еще живы, хотя тяжело ранены\nВы можете преобразить их в своих войнов."), None ))
+                    menu_items.append (( ("Не нужны мне лузеры в армии!"), 0))
+                    i=1
+                    if len(units_for_rec)>0:
+                        for u in units_for_rec:
+                            menu_items.append ( ( ("%s" %  u.name ) , i ))
+                            i+=1
+                    else:
+                        break
 
-                choise =  renpy.display_menu( menu_items )
+                    choise =  renpy.display_menu( menu_items )
 
-                if choise == 0:
-                    break
-                availible_units=[]
-                i=1
-                menu_it=[]
-                menu_it.append( ("Кого из него сделаем, босс?" , None) )
-                menu_it.append( ("Нафиг этого чмошника", 0) )
-                for u in list_of_undead:
-                    urar=u["rarity"]
-                    ch_urar= units_for_rec[choise-1].rarity
-                    if rarity.index (urar) <= rarity.index(ch_urar):
-                        availible_units.append(u)
-                        menu_it.append( (( "%s"% u["name"]), i ) )
-                        i+=1
-                ch =  renpy.display_menu( menu_it )
-                if (ch>0):
-                    un=Unit(availible_units[ch-1])
-                    players_army.add_unit( un )
-                    players_army.regroup()
-                    e("Вы создали [un.name]")
-                units_for_rec.remove(units_for_rec[choise-1])
-                if len(menu_items)<=2:
-                    break
+                    if choise == 0:
+                        break
+                    availible_units=[]
+                    i=1
+                    menu_it=[]
+                    menu_it.append( ("Кого из него сделаем, босс?" , None) )
+                    menu_it.append( ("Нафиг этого чмошника", 0) )
+                    for u in list_of_undead:
+                        urar=u["rarity"]
+                        ch_urar= units_for_rec[choise-1].rarity
+                        if rarity.index (urar) <= rarity.index(ch_urar):
+                            availible_units.append(u)
+                            menu_it.append( (( "%s"% u["name"]), i ) )
+                            i+=1
+                    ch =  renpy.display_menu( menu_it )
+                    if (ch>0):
+                        un=Unit(availible_units[ch-1])
+                        players_army.add_unit( un )
+                        players_army.regroup()
+                        e("Вы создали [un.name]")
+                    units_for_rec.remove(units_for_rec[choise-1])
+                    if len(players_army.units) >= 20:
+                        e("Некоторые враги все еще живы, но в вашей армии больше нет места. Вы милосердно добиваете уцелевших")
+                        break
+                    if len(menu_items)<=2:
+                        break
     return
 
 label Menu_pressed:

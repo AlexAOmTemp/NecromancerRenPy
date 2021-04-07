@@ -42,10 +42,12 @@ init python:
                 self.experience = 0
                 return
             self.experience += value;
-            print ("exp = %d, exp_req = %d"%(self.experience, required_exp)  )
+            # print ("exp = %d, exp_req = %d"%(self.experience, required_exp)  )
+            st = ""
             while self.experience >= required_exp :
                 self.experience -= required_exp
-                self.lvlUp()
+                st+= self.lvlUp()
+            return st
 
         def changePriorityLine(self):
             if self.priority_line == "front":
@@ -56,11 +58,11 @@ init python:
         def lvlUp ( self):
             if self.level < self.level_cap:
                 self.level += 1
-                self.stats.max_health = int (round(self.stats.max_health*1.1+0.5))
-                self.stats.dmg_melee = int (round(self.stats.dmg_melee*1.1+0.5))
-                self.stats.dmg_range = int (round(self.stats.dmg_range*1.1+0.5))
-
-                e("%s получил %d уровень" %( self.name, self.level))
+                self.stats.max_health.grow( int (round(self.stats.max_health.base()*0.15+0.5)) )
+                self.stats.dmg_melee.grow(int (round(self.stats.dmg_melee.base()*0.15+0.5)) )
+                self.stats.dmg_range.grow(int (round(self.stats.dmg_range.base()*0.15+0.5)) )
+                self.stats.current_health.max_health_changed(self.stats.max_health.val())
+                return "%s получил %d уровень\n" %( self.name, self.level)
             else:
                 self.experience = 0
         def __str__(self):
@@ -90,7 +92,7 @@ init python:
 
         def checkHealth(self):
             if self.dead == False:
-                if self.stats.health <=0:
+                if self.stats.current_health.val() <=0:
                     self.dead = True
                     if self.resurrectable:
                         i=dice_100()
@@ -112,4 +114,4 @@ init python:
 
         def isDead(self):
             return self.dead
-    logging ("units")
+    # logging ("units")

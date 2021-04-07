@@ -42,7 +42,7 @@ init python:
                 quant = int (max (round (amount*persent*mult),round(amount)) )
             else:
                 quant = int (round (amount*persent*mult) )
-            # logging ("%s: quant = %d, amount = %d, persent = %f, mult = %d "% (rarity[f], quant, amount, persent, mult) )
+            # # logging ("%s: quant = %d, amount = %d, persent = %f, mult = %d "% (rarity[f], quant, amount, persent, mult) )
             mult*=2
             if len(ls)>0:
                 for i in range (quant):
@@ -55,13 +55,13 @@ init python:
         saveday = currency.day
         saverep = currency.reputation
         while (currency.day<=currency.maxday):
-            # logging ("\nday %d"% currency.day )
+            # # logging ("\nday %d"% currency.day )
             for ar in army_test:
                 army=generate_army(ar)
                 st="%s "%army.name
                 for u in army.units:
                     st+="%s : %s, " % (u.name, u.rarity)
-                # logging (st)
+                # # logging (st)
             currency.day+=10
             currency.reputation+=10
         currency.day = saveday

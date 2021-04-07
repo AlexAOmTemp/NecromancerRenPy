@@ -3,7 +3,7 @@ label start:
     #show screen State_bar
     python:
         initVariables()
-        logging ("start")
+        # logging ("start")
     # call screen fonts_tast_screen
     jump main_map
 
