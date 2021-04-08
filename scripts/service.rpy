@@ -7,6 +7,11 @@ init -6 python:
         dice = renpy.random.randint(1,20)
         return dice
 
+    def dict_to_file (lst, filename):
+        # json.dump( lst, open( filename, 'w' ) )
+        with open(filename, 'w') as json_file:
+            json_file.write( json.dumps(lst))
+
     def lst_to_file (lst, filename):
         with codecs.open(filename, 'w', encoding='utf8') as json_file:
             json.dump(lst, json_file, ensure_ascii=False,indent=4)

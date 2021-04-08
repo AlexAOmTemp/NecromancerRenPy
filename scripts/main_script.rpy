@@ -20,8 +20,8 @@ init -3 python: #before classes initiate, read some files and global variables
 
     effects_list = lst_from_file (renpy.loader.transfn("resources/effects.txt") )
     skill_list = lst_from_file (renpy.loader.transfn("resources/skills.txt") )
-    units_list= lst_from_file (renpy.loader.transfn("resources/units.txt") )
-    item_list= (lst_from_file (renpy.loader.transfn('resources/items.txt') ) )
+    units_list = lst_from_file (renpy.loader.transfn("resources/units.txt") )
+    item_list = lst_from_file (renpy.loader.transfn('resources/items.txt') )
     army_list = lst_from_file (renpy.loader.transfn("resources/armies.txt"))
     generate_items_list = lst_from_file (renpy.loader.transfn("resources/item_generator.txt"))
 

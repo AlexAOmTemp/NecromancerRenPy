@@ -5,10 +5,10 @@ image PlayerBack  = im.FactorScale(im.Scale("icons/PlayerBack.png",120,120), sca
 
 screen battle_screen ( battle):
     frame:
-        text battle.player_army.name
+        text local(battle.player_army.name)
         yalign 0.9
     frame:
-        text battle.enemy_army.name
+        text local(battle.enemy_army.name)
         yalign 0.1
 
     vbox:
@@ -47,7 +47,7 @@ screen unit_screen (unit):
         size_group "Unit"
         ysize scaled (87)
         vbox:
-            text unit.name color "#000000"
+            text local(unit.name) color "#000000"
 
             $cur_hp= max (int (round (unit.stats.current_health.val()) ), 0)
             $max_hp = int (round (unit.stats.max_health.val() ))

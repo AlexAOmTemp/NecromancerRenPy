@@ -12,7 +12,7 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
-define config.name = _("Vampire")
+define config.name = _("Necromancer")
 
 
 ## Determines if the title given above is shown on the main menu screen. Set
@@ -37,7 +37,7 @@ define gui.about = _p("""
 ## distribution. This must be ASCII-only, and must not contain spaces, colons,
 ## or semicolons.
 
-define build.name = "Vampire"
+define build.name = "Necromancer"
 
 
 ## Sounds and music ############################################################
@@ -142,7 +142,7 @@ default preferences.afm_time = 15
 ## This generally should not be changed, and if it is, should always be a
 ## literal string, not an expression.
 
-define config.save_directory = "Vampire-1613779372"
+define config.save_directory = "Necromancer-1613779372"
 
 
 ## Icon ########################################################################

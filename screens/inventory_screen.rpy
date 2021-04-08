@@ -31,14 +31,14 @@ screen inventory_main_screen():
                         draggable True mousewheel True
                         vbox:
                             for itm in currency.items:
-                                textbutton itm.name:
+                                textbutton local(itm.name):
                                     action [SetVariable ("currentItem", itm), If (Player_hero.equipment.slots[itm.slot]!=None , SetVariable ("equippedItem", Player_hero.equipment.slots[itm.slot]) , SetVariable ("equippedItem",None))]
 
                     vbar value YScrollValue("my_scroller") #TAKES YOUR VIEWPORT ID AS THE ARG
-            textbutton 'Sell all' action  (Function ( currency.sellAllItems), SetVariable ("currentItem", None))
+            textbutton local('Sell all') action  (Function ( currency.sellAllItems), SetVariable ("currentItem", None))
         vbox:
             xsize scaled(400)
-            text "Selected:" xalign 0.5
+            text local("Selected:") xalign 0.5
             frame:
                 style "slot"
                 xalign 0.5
@@ -48,21 +48,21 @@ screen inventory_main_screen():
 
             if currentItem:
                 if currentItem.slot in Player_hero.equipment.slots:
-                    textbutton "Equip" action (Function (  Player_hero.equipment.equip, currentItem ), SetVariable ("temp", currentItem), SetVariable ("currentItem", equippedItem), SetVariable ("equippedItem", currentItem) ) xalign 0.5
+                    textbutton local("Equip") action (Function (  Player_hero.equipment.equip, currentItem ), SetVariable ("temp", currentItem), SetVariable ("currentItem", equippedItem), SetVariable ("equippedItem", currentItem) ) xalign 0.5
                 else:
-                    text "No slot for this item"
-                textbutton "Sell ([currentItem.sellCost])" action (Function ( currentItem.sell), SetVariable ("currentItem", None)  ) xalign 0.5
+                    text local("No slot for this item")
+                textbutton local("Sell ([currentItem.sellCost])") action (Function ( currentItem.sell), SetVariable ("currentItem", None)  ) xalign 0.5
         vbox:
             xsize scaled(400)
-            text "Equipped:" xalign 0.5
+            text local("Equipped:") xalign 0.5
             frame:
                 style "slot"
                 xalign 0.5
                 if equippedItem:
-                    text equippedItem.name size 25
+                    text local(equippedItem.name) size 25
             if equippedItem:
                 use item_stats(equippedItem)
-                textbutton "Unequip" action (Function (Player_hero.equipment.unequip, equippedItem ), SetVariable ("equippedItem", None)) xalign 0.5
+                textbutton local("Unequip") action (Function (Player_hero.equipment.unequip, equippedItem ), SetVariable ("equippedItem", None)) xalign 0.5
 
             # if currentItem:
             #     if Player_hero.equipment.slots[currentItem.slot]:
@@ -76,11 +76,11 @@ screen inventory_main_screen():
                     if Player_hero.equipment.slots[sl] == None:
                         frame:
                             style "empty_slot"
-                            text "[sl] empty" size 25
+                            text local("[sl] empty") size 25
                     else:
                         frame:
                             style "slot"
-                            textbutton Player_hero.equipment.slots[sl].name action SetVariable ("equippedItem", Player_hero.equipment.slots[sl]) text_size 25
+                            textbutton local(Player_hero.equipment.slots[sl].name) action SetVariable ("equippedItem", Player_hero.equipment.slots[sl]) text_size 25
 
 style item_stats_text is default:
     xalign 0.0
@@ -88,15 +88,15 @@ screen item_stats(item):
     style_prefix "item_stats"
     if isinstance (item, Item):
         vbox:
-            text "Name: [item.name]"
-            text "Slot: [item.slot]"
-            text "Rarity: [item.rarity]"
+            text local("Name: [item.name]")
+            text local("Slot: [item.slot]")
+            text local("Rarity: [item.rarity]")
             if len (item.stats) > 0:
-                text "Stats:"
+                text local("Stats:")
                 for i in item.stats:
-                    text "{color=#00ff00}[i]{/color}"
+                    text local("{color=#00ff00}[i]{/color}")
             if len (item.skills) > 0:
-                text "Skills:"
+                text local("Skills:")
                 for i in item.skills:
-                    text i
-            text "Sell cost: [item.sellCost]"
+                    text local(i)
+            text local("Sell cost: [item.sellCost]")

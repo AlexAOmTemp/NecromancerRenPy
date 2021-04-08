@@ -85,17 +85,17 @@ screen general():
                 style_prefix "serv"
                 spacing scaled(10)
                 hbox:
-                    text "Activity: "
+                    text local("Activity: ")
                     text "[currency.activity]"
                 hbox:
-                    text "Day: "
+                    text local("Day: ")
                     text "[currency.day]"
                 hbox:
-                    text "Reputation: "
+                    text local("Reputation: ")
                     $rep= int(round(currency.reputation/10))
                     text "[rep]"
                 hbox:
-                    text "Health: "
+                    text local("Health: ")
                     $cur_hp= max (int (round (Player_hero.stats.current_health.val() ) ), 0)
                     $max_hp = int (round (Player_hero.stats.max_health.val() ))
                     text "[cur_hp] / [max_hp]"
@@ -104,12 +104,12 @@ screen general():
             vbox:
                 spacing scaled(10)
                 style_prefix "gen"
-                textbutton 'Menu' action ShowMenu('game_menu',"Load") keysym 'K_ESCAPE'
-                textbutton "Army" clicked Jump ("army")
-                textbutton "Person" clicked Jump ("person")
-                textbutton "Castle" clicked Jump ("castle")
-                textbutton "Journal" clicked Jump ("journal")
-                textbutton "Next day" action Function (next_day)
+                textbutton local('Menu') action ShowMenu('game_menu',"Load") keysym 'K_ESCAPE'
+                textbutton local("Army") clicked Jump ("army")
+                textbutton local("Person") clicked Jump ("person")
+                textbutton local("Castle") clicked Jump ("castle")
+                textbutton local("Journal") clicked Jump ("journal")
+                textbutton local("Next day") action Function (next_day)
 
 
     if tt.value!=" ":
@@ -117,7 +117,7 @@ screen general():
             style_prefix "serv"
             xpos scaled (70)
             ypos scaled (1035)
-            text tt.value:
+            text local(tt.value):
                 xalign 0.5
 
     frame: #resourse panel
@@ -127,7 +127,7 @@ screen general():
         hbox:
             spacing scaled(20)
             vbox:
-                text "Money"
+                text local("Money")
                 text  "[currency.money]"
             hbox:
                 spacing scaled(20)

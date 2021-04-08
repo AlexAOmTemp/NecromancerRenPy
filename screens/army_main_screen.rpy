@@ -18,12 +18,12 @@ screen army_main_screen():
     style_prefix "army"
     add "scene_blue"
     # use army_screen(players_army)
-    textbutton "OK" action Jump("main_map"):
+    textbutton local("OK") action Jump("main_map"):
          xalign 0.9
          yalign 0.9
     hbox:
         xalign 0.5
-        $title_text = ["backline", "frontline"]
+        $title_text = [local("backline"), local("frontline")]
         $ls = [[],[]]
         $ls[0] = players_army.get_backline_units()
         $ls[1] = players_army.get_frontline_units()
@@ -74,12 +74,12 @@ screen army_main_screen():
         frame:
             style "slot"
             if current_unit:
-                text current_unit.name
+                text local(current_unit.name)
         use unit_stats (current_unit)
         if current_unit:
             if current_unit != Player_hero:
-                textbutton "Dismiss" action (Function (players_army.remove_unit, current_unit), (SetVariable( "current_unit", None) ) )
-            textbutton "Change Priority Line" action (Function (current_unit.changePriorityLine), (Function (players_army.regroup) ) )
+                textbutton local("Dismiss") action (Function (players_army.remove_unit, current_unit), (SetVariable( "current_unit", None) ) )
+            textbutton local("Change Priority Line") action (Function (current_unit.changePriorityLine), (Function (players_army.regroup) ) )
 
 
 style stats_text:
@@ -93,7 +93,7 @@ screen unit_stats(unit):
                 xsize 300
 
                 for st in unit.displayble:
-                    text "%s: %s"%(st, getattr(unit, st)) xalign 0.0
+                    text local("%s: %s"%(st, getattr(unit, st)) ) xalign 0.0
                 $cur_hp= max (int (round (unit.stats.current_health.val() ) ), 0)
                 $max_hp = int (round (unit.stats.max_health.val() ))
                 $armr = unit.stats.armor.val()
@@ -101,15 +101,15 @@ screen unit_stats(unit):
                 $dmg_ml = unit.stats.dmg_melee.val()
                 $dmg_rng = unit.stats.dmg_range.val()
                 $arm_perc = round( (1-1/(1 + 0.01 * armr ))*100 , 1 )
-                text "Health: [cur_hp] / [max_hp]"
-                text "Armor: [armr] ([arm_perc]%)"
-                text "Block: [blk]"
-                text "Melee damage: [dmg_ml]"
-                text "Range damage: [dmg_rng]"
+                text local("Health: [cur_hp] / [max_hp]")
+                text local("Armor: [armr] ([arm_perc]%)")
+                text local("Block: [blk]")
+                text local("Melee damage: [dmg_ml]")
+                text local("Range damage: [dmg_rng]")
 
-                text "Priority line: [unit.priority_line]"
-                text "Level: [unit.level] / [unit.level_cap]"
-                text "Experience: [unit.experience] / [unit.required_exp]"
-                text "Skills:"
+                text local("Priority line: [unit.priority_line]")
+                text local("Level: [unit.level] / [unit.level_cap]")
+                text local("Experience: [unit.experience] / [unit.required_exp]")
+                text local("Skills:")
                 for s in unit.skills:
-                    text ("%s"%s["name"])
+                    text local(("%s"%s["name"]))
