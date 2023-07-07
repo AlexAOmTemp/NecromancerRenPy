@@ -50,9 +50,10 @@ init python:
                 for i in additional_skills_choose:
                     self.skills.append ( params["skills"][i])
 
-            self.name=self.name.replace("max_health","health")
+            self.name=self.name.replace("maximum","health")
             self.sellCost = int(round(self.cost/10))
             self.roll_stats()
+            self.name="%s%s{/color}"%(rarity_color[self.rarity],self.name)
 
         def roll_stats(self):
             for i in range (len(self.stats)):
@@ -102,7 +103,8 @@ init python:
                         itm = {}
                         itm["slot"] = slot
                         itm["rarity"] = r
-                        itm["name"] = "%s %s"% (r, gen["name"])
+                        # itm["name"] = "%s %s"% (r, gen["name"])
+                        itm["name"] = "%s"% (gen["name"])
                         itm["stats"]=[]
                         value = [int (round( gen["main values"][0]*powerMult)),int (round(gen["main values"][1]*powerMult))]
                         str_val= ("%s"%value).replace(" ", "")
@@ -113,9 +115,9 @@ init python:
                             itm["stats"].append("%s %s"%(gen["stats"][i], st_vl) )
                         itm["main skills"] =  gen["main skills"]
                         itm["skills"] = gen["skills"]
-                        item_list.append (itm)
+                        item_templates_list.append (itm)
 
     def test_item():
         # global currency
-        for i in items_by_names:
-            currency.addItem(i)
+        for i in item_templates_list:
+            currency.addItemByTemplate(i)

@@ -17,11 +17,12 @@ init -3 python: #before classes initiate, read some files and global variables
     import random
     import copy
     rarity = ["poor","normal","magic","rare","legendary"]
+    rarity_color = {"poor":"{color=#2F4F4F}","normal":"{color=#ffffff}","magic":"{color=#000080}","rare":"{color=#ffff00}","legendary":"{color=#ffa500}"}
 
     effects_list = lst_from_file (renpy.loader.transfn("resources/effects.txt") )
     skill_list = lst_from_file (renpy.loader.transfn("resources/skills.txt") )
     units_list = lst_from_file (renpy.loader.transfn("resources/units.txt") )
-    item_list = lst_from_file (renpy.loader.transfn('resources/items.txt') )
+    item_templates_list = lst_from_file (renpy.loader.transfn('resources/item_templates.txt') )
     army_list = lst_from_file (renpy.loader.transfn("resources/armies.txt"))
     generate_items_list = lst_from_file (renpy.loader.transfn("resources/item_generator.txt"))
 
@@ -90,8 +91,8 @@ init 1 python:
             if u['tag'] == "undead":
                 list_of_undead.append(u)
 
-        items_by_names = init_items_by_names_list(item_list)
-        reward_generator=reward_gen()#after forming item_list
+        items_by_names = init_items_by_names_list(item_templates_list)
+        reward_generator=Reward_Generator()#after forming item_templates_list
 
         currency= Currency()
         players_army = Army("Glory Army")
@@ -109,11 +110,13 @@ init 1 python:
         events_to_cells()
         menu_title=[]
         event_description=""
+        fill_market()
 
-        # test_item()
+        #test_item()
+        #test_choises()
         # testStat()
         # testStatsParser()
-        # # logging ("after all %s"%item_list)
+        # # logging ("after all %s"%item_templates_list)
         # test_scouting_inString ()
 
         # for c in map_cells_ls:
@@ -143,7 +146,7 @@ label cell_menu:
         global event_started
         unfinished_started = False
         current_cell = search ( map_cells_ls, current_cell_name)
-        menu_title = ("Клетка %s, %s" % (current_cell.name[4:],current_cell.type) )
+        menu_title = local ("Клетка %s, %s" % (current_cell.name[4:],current_cell.type) )
         menu_items=[]
         menu_items.append (("Искать приключений", 0))
         menu_items.append( ("Уйти", 1))
@@ -202,18 +205,54 @@ label person:
     jump main_map
 
 label castle:
-    "It is your castle."
+    scene scene_event
+    "It is your castle. Пока в разработке"
     # $test_scouting_inString ()
     jump main_map
 
 label journal:
+    scene scene_event
     nvl clear
-    $e(how_many_cells_on_map())
+    e "Краткая справка:\n
+    Сложность врагов на клетках: лес->поле->деревня->дорога->холмы->горы->город->замок\n
+    На некоторых клетках пока нет событий. Самое сложное событие - осада замка.\n
+    Когда у Вас заканчиваются действия нажмите кнопку Спать.\n
+    Враги становятся сильнее с каждым днем и с ростом Вашей репутации.\n
+    Если у Вас появляются предметы их можно одеть в меню Герой.\n
+    Здоровье юнитов восполняется каждый день.\n
+    На перекрестке есть магазин. в нем несколько вкладок предметов, разделенных по редкости.\n
+    "
+    nvl clear
+    e "Подробная справка:\n
+      Игра повествует о становлении великого некромата.\n
+      Вы начинаете с одним скелетом и без обмундирования.\n
+      Перед Вами карта, разделенная на клетки. Клетки разделены по типу: дороги, поля, горы и тд.\
+    Чтобы узнать тип клетки наведите на нее и посмотрите на подсказку в левом нижнем углу.\n
+      Кликнув на клетку Вы увидете выбор - искать приключений или уйти с клетки. Нажав Искать приключений\
+    Вы столкнетесь с одним из событий. Список событий зависит от типа клетки, на разных клетках одного и того\
+    же типа события будут одинаковые. Некоторые события сохраняются, например найдя на перекрестке однажды магазин,\
+    он будет сохранен в списке событий клетки и Вам не нужно будет искать его снова.\n
+      Большинство событий - встреча с врагами. Игра автоматически посчитает Ваши шансы на победу и риск потерь,\
+    но нужно помнить что это вероятностная оценка, а не 100\% гарантия."
+    nvl clear
+    e "  Битвы в игре полностью автоматические, и проходят в несколько шагов.\
+    Изначально армии расположены на расстоянии 3 клетки, и постепенно сближаются.\
+    Вы можете кликать мышкой чтобы ускорить битву.\n
+      Противостоящие армии поделены на 2 ряда каждая. Войны из первого ряда могут сражаться в ближнем бою, из дальнего - стрелять.\
+    Соответственно войн ближнего боя поставленный во второй ряд будет простаивать, пока в первом ряду не освободится место.\
+    Юниты во втором ряду не получают урона, весь урон принимает на себя первый ряд.\n
+      Воины первого ряда как бы защищают стрелков из второго ряда, поэтому если количество войнов первого ряда станет\
+    меньше чем второго, то юнит из второго ряда будет автоматически перемещен в первый, и сможет стать целью врагов.\n
+      Победив в битве вы получите награду - деньги, опыт, возможно предмет. Иногда некоторые побежденные враги могут быть\
+    обращены в Ваших войнов. Если это произойдет Вы увидите соответствующий экран сообщения."
+    nvl clear
+    "Удачной игры!"
     jump main_map
 
 
 init python:
     def next_day ():
+        fill_market()
         currency.activity=3
         currency.day+=1
         for u in players_army.units:
@@ -239,7 +278,7 @@ default gained_exp = 0
 label battle_field:
     scene scene_battle
     $result = False
-    if not enemy_army:
+    if not enemy_army and current_cell.current_event.army:
         $enemy_army = generate_army( search_in_list_by_name (army_list, current_cell.current_event.army ) )
 
     if len (enemy_army.units) == 0:
@@ -254,6 +293,7 @@ label battle_field:
         hide screen say
         window hide
         while (not new_battle.isOver()):
+            # $renpy.show_screen("battle_screen",new_battle)
             show screen battle_screen (new_battle)
             pause(1)
             $new_battle.next_round()
@@ -324,7 +364,7 @@ label resurrection:
                     i=1
                     if len(units_for_rec)>0:
                         for u in units_for_rec:
-                            menu_items.append ( ( ("%s" %  u.name ) , i ))
+                            menu_items.append ( ( local ("%s" %  u.name ) , i ))
                             i+=1
                     else:
                         break
@@ -343,14 +383,14 @@ label resurrection:
                         ch_urar= units_for_rec[choise-1].rarity
                         if rarity.index (urar) <= rarity.index(ch_urar):
                             availible_units.append(u)
-                            menu_it.append( (( "%s"% u["name"]), i ) )
+                            menu_it.append( ( local( "%s"% u["name"]), i ) )
                             i+=1
                     ch =  renpy.display_menu( menu_it )
                     if (ch>0):
                         un=Unit(availible_units[ch-1])
                         players_army.add_unit( un )
                         players_army.regroup()
-                        e("Вы создали [un.name]")
+                        e( local("Вы создали [un.name]") )
                     units_for_rec.remove(units_for_rec[choise-1])
                     if len(players_army.units) >= 20:
                         e("Некоторые враги все еще живы, но в вашей армии больше нет места. Вы милосердно добиваете уцелевших")

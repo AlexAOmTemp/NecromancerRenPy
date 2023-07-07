@@ -43,6 +43,8 @@ init -1 python:
     def sc_report():
         global enemy_army
         global players_army
+        if not current_cell.current_event.army:
+            return ""
         enemy_army = generate_army( search_in_list_by_name (army_list, current_cell.current_event.army ) )
         loss, win = scouting_inString (players_army, enemy_army)
         return ("Вероятные потери: %s\nШансы победить: %s"%(loss, win) )

@@ -8,6 +8,7 @@ style inventory_text is default:
     font fonts_list[0]
 
 style inventory_button_text is army_text
+
 style empty_slot is slot:
     background Frame ("empty square.png",0,0)
 
@@ -15,8 +16,7 @@ screen inventory_main_screen():
     tag main
     style_prefix "inventory"
     add "scene_event"
-    # use army_screen(players_army)
-    textbutton "OK" action Jump("main_map"):
+    textbutton local("OK") action Jump("main_map"):
          xalign 0.9
          yalign 0.9
 
@@ -26,7 +26,7 @@ screen inventory_main_screen():
         vbox:
             frame:
                 side ("c r"):
-                    area (1,0,scaled(400),600)
+                    area (1,0,scaled(400),scaled(600))
                     viewport id "my_scroller": #REMEMBER YOUR VIEWPORT ID SO THE SCROLLBAR IS PLACED FOR IT
                         draggable True mousewheel True
                         vbox:
@@ -43,7 +43,7 @@ screen inventory_main_screen():
                 style "slot"
                 xalign 0.5
                 if currentItem:
-                    text currentItem.name size 25
+                    text local (currentItem.name) size 25
             use item_stats(currentItem)
 
             if currentItem:
@@ -69,32 +69,32 @@ screen inventory_main_screen():
             #         use item_stats(Player_hero.equipment.slots[currentItem.slot])
         vbox:
             xsize scaled(400)
-            use unit_stats(Player_hero)
+            use unit_stats(Player_hero,equippedItem ,currentItem)
         vbox:
             for sl in Player_hero.equipment.slots:
-
-                    if Player_hero.equipment.slots[sl] == None:
-                        frame:
-                            style "empty_slot"
-                            text local("[sl] empty") size 25
-                    else:
-                        frame:
-                            style "slot"
-                            textbutton local(Player_hero.equipment.slots[sl].name) action SetVariable ("equippedItem", Player_hero.equipment.slots[sl]) text_size 25
+                if Player_hero.equipment.slots[sl] == None:
+                    frame:
+                        style "empty_slot"
+                        text local("%s empty"%sl) size 25
+                else:
+                    frame:
+                        style "slot"
+                        textbutton local(Player_hero.equipment.slots[sl].name) action (SetVariable ("equippedItem", Player_hero.equipment.slots[sl]),SetVariable ("currentItem", None)  ) text_size 25
 
 style item_stats_text is default:
     xalign 0.0
+
 screen item_stats(item):
     style_prefix "item_stats"
     if isinstance (item, Item):
         vbox:
-            text local("Name: [item.name]")
-            text local("Slot: [item.slot]")
-            text local("Rarity: [item.rarity]")
+            text local("Name: %s"%item.name)
+            text local("Slot: %s"%item.slot)
+            text local("Rarity: %s"%item.rarity)
             if len (item.stats) > 0:
                 text local("Stats:")
                 for i in item.stats:
-                    text local("{color=#00ff00}[i]{/color}")
+                    text local("{color=#006400}%s{/color}"%i)
             if len (item.skills) > 0:
                 text local("Skills:")
                 for i in item.skills:

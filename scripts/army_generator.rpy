@@ -30,7 +30,7 @@ init python:
         persent = float(currency.day+currency.reputation) / float(currency.maxday+currency.maxrep)
         rar_ind = rarity.index (parameters["rarity"])
         units={}
-        amount = parameters["amount"]
+        amount = parameters["amount"] #amount of units with rarity = army ratiry
         mult = 2
         for f in range (rar_ind,-1,-1):
             ls=[]
@@ -38,10 +38,14 @@ init python:
                 if au["rarity"]==rarity[f]:
                     ls.append(au)
             quant=0
-            if (f==rar_ind):
-                quant = int (max (round (amount*persent*mult),round(amount)) )
+            if f==rar_ind:
+                quant = int (max (round (persent*mult),round(amount)) ) #minimum amount of units with rarity = army ratiry
+            elif f==rar_ind-1:
+                quant = int (max (round (2*persent*mult),round(2)) ) #minimum 2 of units with rarity = army ratiry - 1
             else:
-                quant = int (round (amount*persent*mult) )
+                quant = int (round (persent*mult) ) # additional units if enought percent
+
+
             # # logging ("%s: quant = %d, amount = %d, persent = %f, mult = %d "% (rarity[f], quant, amount, persent, mult) )
             mult*=2
             if len(ls)>0:

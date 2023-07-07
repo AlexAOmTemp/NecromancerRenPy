@@ -32,7 +32,7 @@ style choice_button_text is choice_text
 
 screen choice(items):
     style_prefix "choice"
-
+    add "scene_event"
     vbox:
         yalign 0.5
         xalign 0.5

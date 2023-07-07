@@ -2,16 +2,16 @@
     "name": "sword",
     "slot": "melee weapon",
     "main stats": "Increment melee damage",
-    "main values": [3,4],
+    "main values": [4,8],
     "stats":  ["Increment maximum health", "Increment armor", "Increment block"],
-    "values": [ [1,3], [0.9,1.4], [1,3] ],
+    "values": [ [5,8], [4,8], [1,3] ],
     "main skills": ["melee attack"],
     "skills": []
 },{
     "name": "bow",
     "slot": "range weapon",
     "main stats": "Increment range damage",
-    "main values": [2,3.5],
+    "main values": [3.5,7],
     "stats":  [],
     "values": [],
     "main skills": ["range attack"],
@@ -22,43 +22,43 @@
     "main stats": "Increment block",
     "main values": [4,6],
     "stats":  ["Increment maximum health", "Increment armor"],
-    "values": [[1,3],[1,4]],
+    "values": [[8,10],[6,10]],
     "main skills": [],
     "skills": []
 },{
     "name": "axe",
     "slot": "melee weapon",
     "main stats": "Increment melee damage",
-    "main values": [3,4.5],
+    "main values": [5,9],
     "stats":  ["Increment maximum health"],
-    "values": [ [1,3] ],
+    "values": [ [8,10] ],
     "main skills": ["melee attack"],
     "skills": []
 },{
     "name": "platemail",
     "slot": "armor",
     "main stats": "Increment armor",
-    "main values": [2,4],
+    "main values": [10,15],
     "stats":  ["Increment maximum health"],
-    "values": [ [4,8] ],
+    "values": [ [10,15] ],
     "main skills": [],
     "skills": []
 },{
     "name": "helmet",
     "slot": "helmet",
     "main stats": "Increment armor",
-    "main values": [1.6,3],
+    "main values": [6,10],
     "stats":  ["Increment maximum health"],
-    "values": [ [1,4] ],
+    "values": [ [8,10] ],
     "main skills": [],
     "skills": []
 },{
     "name": "boots",
     "slot": "boots",
     "main stats": "Increment armor",
-    "main values": [1.6,3],
+    "main values": [6,10],
     "stats":  ["Increment maximum health"],
-    "values": [ [1,4] ],
+    "values": [ [8,10] ],
     "main skills": [],
     "skills": []
 }]

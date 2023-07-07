@@ -3,7 +3,6 @@ init python:
         expForNextLvlMultiple = 1.4
         expForFirstLvlUp = 10
         possible_parameters=set ( ("health max_health armor block dmg_melee dmg_range armored_health").split() )
-        displayble = ['name','unit_type','rarity','maxRange']
         def __init__(self, unit_params):
             self.tag = unit_params["tag"]
             self.unit_type = unit_params["type"]

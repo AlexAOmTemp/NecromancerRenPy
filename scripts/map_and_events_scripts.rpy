@@ -110,17 +110,19 @@ init python:
                 nvl_clear()
                 st="событие завершено\n"
                 it, gld = reward_generator.getReward(self.current_event.reward)
+                itm_st=""
                 for i in it:
-                    currency.addItem (i)
+                    item = Item(i)
+                    itm_st+=local("%s\n"%item.name)
+                    currency.addItem (item)
+
                 currency.money += gld
 
                 if len (it)>0 or gld>0:
                     st+=("получена награда!")
                     if gld>0:
                         st+=("\nзолото: %d\n" % gld)
-                    if len(it)>0:
-                        toStr = ''.join(["{color=#00ff00}"+(str(elem)+'{/color}\n') for elem in it])
-                        st+=toStr
+                    st+=itm_st
                     e (st)
 
 

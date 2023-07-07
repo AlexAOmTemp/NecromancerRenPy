@@ -11,7 +11,8 @@ image necromanser_border = im.FactorScale(im.Scale("map_border.png",340,340), sc
 image map_border = im.FactorScale("map_border.png", scaling)
 # image button = Frame ("board top.png")
 image button = Frame ("map_border.png")
-image status = Frame ("scene_event.png")
+image status = Frame ("scene_battle.png")
+image textbutton_background = Frame ("textbutton.png")
 
     # (scaled_x, int(643*scaling), scaled_w, scaled_h)
     # (60, 714, 320, 60)

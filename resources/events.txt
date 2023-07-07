@@ -25,7 +25,7 @@
 	    "reward":{
     		"legendary":3
     	},
-        "army":"legendary_human_army_3"
+        "army":"legendary human army 3"
     },
     {
         "name": "Одинокий путник",
@@ -36,9 +36,10 @@
         "saveble": false,
 	    "level": "poor",
 	    "reward":{
-    		"poor":1
+    		"poor":1,
+            "items":"Glory Sword of Pigmarilion"
     	},
-        "army":"poor_human_army_1"
+        "army":"poor human army 1"
     },
     {
         "name": "Всякий сброд",
@@ -51,7 +52,7 @@
 	    "reward":{
     		"poor":3
     	},
-        "army":"poor_human_army_3"
+        "army":"poor human army 3"
     },
 
     {
@@ -65,7 +66,7 @@
 	    "reward":{
     		"normal":3
     	},
-        "army":"normal_human_army_3"
+        "army":"normal human army 3"
     },
     {
         "name": "Крестьянин со скрабом",
@@ -78,7 +79,7 @@
 	    "reward":{
     		"normal":1
     	},
-        "army":"normal_human_army_1"
+        "army":"normal human army 1"
     },
     {
         "name": "Один в поле воин",
@@ -91,7 +92,7 @@
 	    "reward":{
     		"magic":1
     	},
-        "army":"magic_human_army_1"
+        "army":"magic human army 1"
     },
     {
         "name": "Копье в моей заднице",
@@ -104,7 +105,7 @@
 	    "reward":{
     		"rare":1
     	},
-        "army":"rare_human_army_1"
+        "army":"rare human army 1"
     },
     {
         "name": "Кто на шашлыки",
@@ -117,7 +118,7 @@
 	    "reward":{
     		"rare":3
     	},
-        "army":"rare_human_army_3"
+        "army":"rare human army 3"
     },
     {
         "name": "Одинокий рыцарь",
@@ -130,7 +131,7 @@
 	    "reward":{
     		"legendary":1
     	},
-        "army":"legendary_human_army_1"
+        "army":"legendary human army 1"
     },
     {
         "name": "Забытая могила",
@@ -142,7 +143,7 @@
 	    "level": "poor",
 	    "reward":{
     	},
-        "army":"poor_human_army_2"
+        "army":"poor human army 2"
     },
     {
         "name": "Три брата акробата",
@@ -154,6 +155,17 @@
 	    "level": "magic",
 	    "reward":{
     	},
-        "army":"magic_human_army_3"
+        "army":"magic human army 3"
+    },
+    {
+        "name": "Market",
+        "max_times_happens": 1,
+        "blocks_events": [],
+        "needs_events": [],
+        "jump_to_label": "market",
+        "saveble": true,
+        "level": "legendary",
+        "reward":{                },
+        "army":""
     }
 ]

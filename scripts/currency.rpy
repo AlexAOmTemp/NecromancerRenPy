@@ -14,8 +14,14 @@ init python:
             st='\n'.join([str(elem) for elem in self.items])
             return (st)
 
-        def addItem (self, itemName):
-            self.items.append( Item ( search_in_list_by_name ( item_list, itemName ) ))
+        def addItemByName (self, itemName):
+            self.items.append( Item ( search_in_list_by_name ( item_templates_list, itemName ) ))
+
+        def addItemByTemplate (self, item_template):
+            self.items.append( Item (item_template) )
+
+        def addItem (self, item):
+            self.items.append( item )
 
         def sellAllItems (self):
             for i in reversed(self.items):

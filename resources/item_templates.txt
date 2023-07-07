@@ -1,0 +1,10 @@
+[{
+    "name": "Glory Sword of Pigmarilion",
+    "slot": "melee weapon",
+    "main stats": ["Increment melee damage 30"],
+    "stats": ["Increment maximum health 50"],
+    "main skills": ["melee attack"],
+    "skills":  [],
+    "rarity": "legendary"
+}
+]
