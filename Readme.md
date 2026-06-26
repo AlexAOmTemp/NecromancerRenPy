@@ -17,9 +17,11 @@ Unit types, events, and other data are configured via text files, allowing chang
 
 # Future plans:
 
-Add a storyline and quests, 
-introduce a spell system and skill trees, 
-and expand the game with more content.
+Add a storyline and quests
+
+Introduce a spell system and skill trees 
+
+Expand the game with more content
 
 
 # Screenshots:
